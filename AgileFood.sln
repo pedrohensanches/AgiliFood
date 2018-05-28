@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgileFood", "AgileFood\AgileFood.csproj", "{4BFF162F-7A32-4854-A104-22CFF68B9CE4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BFF162F-7A32-4854-A104-22CFF68B9CE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BFF162F-7A32-4854-A104-22CFF68B9CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BFF162F-7A32-4854-A104-22CFF68B9CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BFF162F-7A32-4854-A104-22CFF68B9CE4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5052EC32-C22C-43D3-8EBD-9FE93C945669}
+	EndGlobalSection
+EndGlobal
