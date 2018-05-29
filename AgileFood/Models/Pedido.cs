@@ -14,10 +14,13 @@ namespace AgileFood.Models
         public int Id { get; set; }
 
         [Required]
-        public DateTime Data { get; set; }
+        [Display(Name = "Data de Registro")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime DataDeRegistro { get; set; }
 
         [Required]
         [ForeignKey("Id")]
+        [Column("IdUsuario")]
         [Display(Name = "Funcionário")]
         public Usuario Funcionario { get; set; }
 
