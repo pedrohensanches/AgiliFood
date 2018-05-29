@@ -11,13 +11,13 @@ namespace AgileFood.Models
 
         public AgiliFoodContext() : base("name=AgiliFoodContext") { }
 
-        public DbSet<Cardapio> Cardapio { get; set; }
-        public DbSet<Categoria> Categoria { get; set; }
-        public DbSet<Fornecedor> Fornecedor { get; set; }
-        public DbSet<ItemPedido> ItemPedido { get; set; }
-        public DbSet<Pedido> Pedido { get; set; }
-        public DbSet<Produto> Produto { get; set; }
-        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Cardapio> Cardapios { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+        public DbSet<ItemPedido> ItensDePedidos { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
     }
 }
