@@ -10,7 +10,7 @@ namespace AgileFood.Models
     {
 
         public AgiliFoodContext() : base("name=AgiliFoodContext") {
-            Database.SetInitializer<AgiliFoodContext>(null);
+            //Database.SetInitializer<AgiliFoodContext>(null);
         }
 
         public DbSet<Cardapio> Cardapios { get; set; }
