@@ -167,6 +167,9 @@
     <Compile Include="Models\Maps\CategoriaMap.cs" />
     <Compile Include="Models\Maps\FornecedorMap.cs" />
     <Compile Include="Models\Maps\ItemPedidoMap.cs" />
+    <Compile Include="Models\Maps\PedidoMap.cs" />
+    <Compile Include="Models\Maps\ProdutoMap.cs" />
+    <Compile Include="Models\Maps\UsuarioMaps.cs" />
     <Compile Include="Models\Pedido.cs" />
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Usuario.cs" />

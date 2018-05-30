@@ -7,11 +7,11 @@ using System.Web;
 
 namespace AgileFood.Models.Maps
 {
-    public sealed class FornecedorMap : EntityTypeConfiguration<Fornecedor>
+    public sealed class ProdutoMap : EntityTypeConfiguration<Produto>
     {
-        public FornecedorMap()
+        public ProdutoMap()
         {
-            ToTable("Fornecedores");
+            ToTable("Produtos");
 
             HasKey(x => x.Id)
                 .Property(x => x.Id)
@@ -22,16 +22,19 @@ namespace AgileFood.Models.Maps
                 .IsRequired()
                 .HasMaxLength(80);
 
-            Property(x => x.CNPJ)
-                .IsRequired()
-                .HasMaxLength(14);
+            Property(x => x.Descricao)
+                .HasMaxLength(300);
 
-            Property(x => x.Ativo)
+            Property(x => x.Valor)
                 .IsRequired();
 
-            //Responsável
-            //produtos
-            //cardapio
+            Property(x => x.Disponivel)
+                .IsRequired();
+
+
+            //Fornecedor
+            //Categoria
+            //Itens
         }
     }
 }
