@@ -12,6 +12,11 @@ namespace AgileFood.Models
 
     public class Usuario
     {
+        public Usuario()
+        {
+            Pedidos = new HashSet<Pedido>();
+        }
+
         public int Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }

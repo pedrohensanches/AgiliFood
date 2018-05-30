@@ -5,6 +5,11 @@ namespace AgileFood.Models
 {
     public class Pedido
     {
+        public Pedido()
+        {
+            Itens = new HashSet<ItemPedido>();
+        }
+
         public int Id { get; set; }
         public DateTime DataDeRegistro { get; set; }
         public string Observacoes { get; set; }

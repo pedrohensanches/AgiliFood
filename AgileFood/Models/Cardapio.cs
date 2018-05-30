@@ -8,7 +8,7 @@ namespace AgileFood.Models
         public string Titulo { get; set; }
         public DateTime DataDeRegistro { get; set; }
         public bool Ativo { get; set; }
-        public virtual Fornecedor Fornecedor { get; set; }
+        public int FornecedorId { get; set; }
         public string SegundaFeira { get; set; }
         public string TercaFeira { get; set; }
         public string QuartaFeira { get; set; }
@@ -16,5 +16,7 @@ namespace AgileFood.Models
         public string SextaFeira { get; set; }
         public string Sabado { get; set; }
         public string Domingo { get; set; }
+        
+        public virtual Fornecedor Fornecedor { get; set; }
     }
 }
