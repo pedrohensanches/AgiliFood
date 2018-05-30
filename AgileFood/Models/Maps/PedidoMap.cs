@@ -24,7 +24,13 @@ namespace AgileFood.Models.Maps
             Property(x => x.Observacoes)
                 .HasMaxLength(300);
 
-            //Usuario
+            Property(x => x.FuncionarioId)
+                .IsRequired();
+
+            HasRequired(x => x.Funcionario)
+                .WithMany(x => x.Pedidos)
+                .HasForeignKey(c => c.FuncionarioId);
+
             //itens
         }
     }

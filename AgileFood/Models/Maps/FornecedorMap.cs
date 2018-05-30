@@ -29,9 +29,7 @@ namespace AgileFood.Models.Maps
             Property(x => x.Ativo)
                 .IsRequired();
 
-            //Responsável
             //produtos
-            //cardapio
         }
     }
 }

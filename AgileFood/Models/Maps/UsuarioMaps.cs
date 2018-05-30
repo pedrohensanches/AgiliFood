@@ -39,9 +39,9 @@ namespace AgileFood.Models.Maps
 
             Property(x => x.Tipo)
                 .IsRequired();
-
-            //pedidos
-            //fornecedor
+            
+            HasOptional(x => x.Fornecedor)
+                .WithOptionalPrincipal(l => l.Responsavel);
 
         }
     }
