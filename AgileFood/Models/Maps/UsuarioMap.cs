@@ -7,9 +7,9 @@ using System.Web;
 
 namespace AgileFood.Models.Maps
 {
-    public sealed class UsuarioMaps : EntityTypeConfiguration<Usuario>
+    public sealed class UsuarioMap : EntityTypeConfiguration<Usuario>
     {
-        public UsuarioMaps()
+        public UsuarioMap()
         {
             ToTable("Usuarios");
 

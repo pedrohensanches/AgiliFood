@@ -22,8 +22,6 @@ namespace AgileFood.Models.Maps
                 .IsRequired()
                 .HasMaxLength(50);
 
-            //Produtos
-
         }
     }
 }

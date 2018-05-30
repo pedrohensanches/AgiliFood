@@ -12,6 +12,8 @@ namespace AgileFood.Models.Maps
         {
             ToTable("ItensDePedidos");
 
+            HasKey(a => new { a.PedidoId, a.ProdutoId });
+
             Property(x => x.Quantidade)
                 .IsRequired();
 
@@ -20,6 +22,16 @@ namespace AgileFood.Models.Maps
 
             Property(x => x.ProdutoId)
                 .IsRequired();
+
+            HasRequired(c => c.Pedido)
+                .WithMany(c => c.Itens)
+                .HasForeignKey(c => c.PedidoId)
+                .WillCascadeOnDelete(false);
+
+            HasRequired(c => c.Produto)
+                .WithMany(c => c.Itens)
+                .HasForeignKey(c => c.ProdutoId)
+                .WillCascadeOnDelete(false);
 
         }
     }

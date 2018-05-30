@@ -31,7 +31,6 @@ namespace AgileFood.Models.Maps
                 .WithMany(x => x.Pedidos)
                 .HasForeignKey(c => c.FuncionarioId);
 
-            //itens
         }
     }
 }

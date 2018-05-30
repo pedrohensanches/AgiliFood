@@ -31,10 +31,20 @@ namespace AgileFood.Models.Maps
             Property(x => x.Disponivel)
                 .IsRequired();
 
+            Property(x => x.FornecedorId)
+                .IsRequired();
 
-            //Fornecedor
-            //Categoria
-            //Itens
+            HasRequired(x => x.Fornecedor)
+                .WithMany(x => x.Produtos)
+                .HasForeignKey(c => c.FornecedorId);
+
+            Property(x => x.CategoriaId)
+                .IsRequired();
+
+            HasRequired(x => x.Categoria)
+                .WithMany(x => x.Produtos)
+                .HasForeignKey(c => c.CategoriaId);
+
         }
     }
 }

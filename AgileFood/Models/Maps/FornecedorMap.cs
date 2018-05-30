@@ -29,7 +29,6 @@ namespace AgileFood.Models.Maps
             Property(x => x.Ativo)
                 .IsRequired();
 
-            //produtos
         }
     }
 }

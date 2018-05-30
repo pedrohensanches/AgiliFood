@@ -19,5 +19,16 @@ namespace AgileFood.Models
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new Maps.CardapioMap());
+            modelBuilder.Configurations.Add(new Maps.CategoriaMap());
+            modelBuilder.Configurations.Add(new Maps.FornecedorMap());
+            modelBuilder.Configurations.Add(new Maps.ItemPedidoMap());
+            modelBuilder.Configurations.Add(new Maps.PedidoMap());
+            modelBuilder.Configurations.Add(new Maps.ProdutoMap());
+            modelBuilder.Configurations.Add(new Maps.UsuarioMap());
+        }
+
     }
 }
