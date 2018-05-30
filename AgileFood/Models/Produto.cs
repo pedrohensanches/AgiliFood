@@ -16,7 +16,7 @@ namespace AgileFood.Models
         public bool Disponivel { get; set; }
         public int FornecedorId { get; set; }
         public int CategoriaId { get; set; }
-
+        
         public virtual Fornecedor Fornecedor { get; set; }
         public virtual Categoria Categoria { get; set; }
         public virtual ICollection<ItemPedido> Itens { get; set; }

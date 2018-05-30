@@ -13,12 +13,12 @@ namespace AgileFood.Models.Maps
         {
             ToTable("ItensDePedidos");
 
-            //HasKey(a => new { a.PedidoId, a.ProdutoId });
+            HasKey(x => new { x.PedidoId, x.ProdutoId });
 
-            HasKey(x => x.Id)
-                .Property(x => x.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
-                .IsRequired();
+            //HasKey(x => x.Id)
+            //    .Property(x => x.Id)
+            //    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+            //    .IsRequired();
 
             Property(x => x.Quantidade)
                 .IsRequired();

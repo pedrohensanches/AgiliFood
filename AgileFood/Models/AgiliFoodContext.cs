@@ -9,7 +9,9 @@ namespace AgileFood.Models
     public class AgiliFoodContext : DbContext
     {
 
-        public AgiliFoodContext() : base("name=AgiliFoodContext") { }
+        public AgiliFoodContext() : base("name=AgiliFoodContext") {
+            Database.SetInitializer<AgiliFoodContext>(null);
+        }
 
         public DbSet<Cardapio> Cardapios { get; set; }
         public DbSet<Categoria> Categorias { get; set; }
