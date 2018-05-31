@@ -36,19 +36,19 @@ namespace AgileFood.Controllers
             return View(cardapio);
         }
 
-        // GET: Cardapios/Create
-        public ActionResult Create()
+        // GET: Cardapios/Adicionar
+        public ActionResult Adicionar()
         {
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome");
             return View();
         }
 
-        // POST: Cardapios/Create
+        // POST: Cardapios/Adicionar
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Titulo,DataDeRegistro,Ativo,FornecedorId,SegundaFeira,TercaFeira,QuartaFeira,QuintaFeira,SextaFeira,Sabado,Domingo")] Cardapio cardapio)
+        public ActionResult Adicionar([Bind(Include = "Id,Titulo,DataDeRegistro,Ativo,FornecedorId,SegundaFeira,TercaFeira,QuartaFeira,QuintaFeira,SextaFeira,Sabado,Domingo")] Cardapio cardapio)
         {
             if (ModelState.IsValid)
             {
@@ -61,8 +61,8 @@ namespace AgileFood.Controllers
             return View(cardapio);
         }
 
-        // GET: Cardapios/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Cardapios/Editar/5
+        public ActionResult Editar(int? id)
         {
             if (id == null)
             {
@@ -77,12 +77,12 @@ namespace AgileFood.Controllers
             return View(cardapio);
         }
 
-        // POST: Cardapios/Edit/5
+        // POST: Cardapios/Editar/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Titulo,DataDeRegistro,Ativo,FornecedorId,SegundaFeira,TercaFeira,QuartaFeira,QuintaFeira,SextaFeira,Sabado,Domingo")] Cardapio cardapio)
+        public ActionResult Editar([Bind(Include = "Id,Titulo,DataDeRegistro,Ativo,FornecedorId,SegundaFeira,TercaFeira,QuartaFeira,QuintaFeira,SextaFeira,Sabado,Domingo")] Cardapio cardapio)
         {
             if (ModelState.IsValid)
             {
@@ -94,8 +94,8 @@ namespace AgileFood.Controllers
             return View(cardapio);
         }
 
-        // GET: Cardapios/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Cardapios/Deletar/5
+        public ActionResult Deletar(int? id)
         {
             if (id == null)
             {
@@ -109,10 +109,10 @@ namespace AgileFood.Controllers
             return View(cardapio);
         }
 
-        // POST: Cardapios/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Cardapios/Deletar/5
+        [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Confirmar(int id)
         {
             Cardapio cardapio = db.Cardapios.Find(id);
             db.Cardapios.Remove(cardapio);

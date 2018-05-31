@@ -22,7 +22,7 @@ namespace AgileFood.Controllers
         }
 
         // GET: Pedidos/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Detalhes(int? id)
         {
             if (id == null)
             {
@@ -36,19 +36,19 @@ namespace AgileFood.Controllers
             return View(pedido);
         }
 
-        // GET: Pedidos/Create
-        public ActionResult Create()
+        // GET: Pedidos/Adicionar
+        public ActionResult Adicionar()
         {
             ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome");
             return View();
         }
 
-        // POST: Pedidos/Create
+        // POST: Pedidos/Adicionar
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
+        public ActionResult Adicionar([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
@@ -61,8 +61,8 @@ namespace AgileFood.Controllers
             return View(pedido);
         }
 
-        // GET: Pedidos/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Pedidos/Editar/5
+        public ActionResult Editar(int? id)
         {
             if (id == null)
             {
@@ -77,12 +77,12 @@ namespace AgileFood.Controllers
             return View(pedido);
         }
 
-        // POST: Pedidos/Edit/5
+        // POST: Pedidos/Editar/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
+        public ActionResult Editar([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
@@ -94,8 +94,8 @@ namespace AgileFood.Controllers
             return View(pedido);
         }
 
-        // GET: Pedidos/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Pedidos/Deletar/5
+        public ActionResult Deletar(int? id)
         {
             if (id == null)
             {
@@ -109,10 +109,10 @@ namespace AgileFood.Controllers
             return View(pedido);
         }
 
-        // POST: Pedidos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Pedidos/Deletar/5
+        [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Confirmar(int id)
         {
             Pedido pedido = db.Pedidos.Find(id);
             db.Pedidos.Remove(pedido);
