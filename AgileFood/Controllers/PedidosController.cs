@@ -10,107 +10,112 @@ using AgileFood.Models;
 
 namespace AgileFood.Controllers
 {
-    public class CategoriasController : Controller
+    public class PedidosController : Controller
     {
         private AgiliFoodContext db = new AgiliFoodContext();
 
-        // GET: Categorias
+        // GET: Pedidos
         public ActionResult Index()
         {
-            return View(db.Categorias.ToList());
+            var pedidos = db.Pedidos.Include(p => p.Funcionario);
+            return View(pedidos.ToList());
         }
 
-        // GET: Categorias/Details/5
+        // GET: Pedidos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Pedido pedido = db.Pedidos.Find(id);
+            if (pedido == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            return View(pedido);
         }
 
-        // GET: Categorias/Create
+        // GET: Pedidos/Create
         public ActionResult Create()
         {
+            ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome");
             return View();
         }
 
-        // POST: Categorias/Create
+        // POST: Pedidos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome")] Categoria categoria)
+        public ActionResult Create([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
-                db.Categorias.Add(categoria);
+                db.Pedidos.Add(pedido);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(categoria);
+            ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome", pedido.FuncionarioId);
+            return View(pedido);
         }
 
-        // GET: Categorias/Edit/5
+        // GET: Pedidos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Pedido pedido = db.Pedidos.Find(id);
+            if (pedido == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome", pedido.FuncionarioId);
+            return View(pedido);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Pedidos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome")] Categoria categoria)
+        public ActionResult Edit([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(categoria).State = EntityState.Modified;
+                db.Entry(pedido).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(categoria);
+            ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome", pedido.FuncionarioId);
+            return View(pedido);
         }
 
-        // GET: Categorias/Delete/5
+        // GET: Pedidos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Pedido pedido = db.Pedidos.Find(id);
+            if (pedido == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            return View(pedido);
         }
 
-        // POST: Categorias/Delete/5
+        // POST: Pedidos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Categoria categoria = db.Categorias.Find(id);
-            db.Categorias.Remove(categoria);
+            Pedido pedido = db.Pedidos.Find(id);
+            db.Pedidos.Remove(pedido);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

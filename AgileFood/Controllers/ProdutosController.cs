@@ -10,107 +10,116 @@ using AgileFood.Models;
 
 namespace AgileFood.Controllers
 {
-    public class CategoriasController : Controller
+    public class ProdutosController : Controller
     {
         private AgiliFoodContext db = new AgiliFoodContext();
 
-        // GET: Categorias
+        // GET: Produtos
         public ActionResult Index()
         {
-            return View(db.Categorias.ToList());
+            var produtos = db.Produtos.Include(p => p.Categoria).Include(p => p.Fornecedor);
+            return View(produtos.ToList());
         }
 
-        // GET: Categorias/Details/5
+        // GET: Produtos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Produto produto = db.Produtos.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            return View(produto);
         }
 
-        // GET: Categorias/Create
+        // GET: Produtos/Create
         public ActionResult Create()
         {
+            ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome");
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome");
             return View();
         }
 
-        // POST: Categorias/Create
+        // POST: Produtos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome")] Categoria categoria)
+        public ActionResult Create([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,FornecedorId,CategoriaId")] Produto produto)
         {
             if (ModelState.IsValid)
             {
-                db.Categorias.Add(categoria);
+                db.Produtos.Add(produto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(categoria);
+            ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome", produto.CategoriaId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
+            return View(produto);
         }
 
-        // GET: Categorias/Edit/5
+        // GET: Produtos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Produto produto = db.Produtos.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome", produto.CategoriaId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
+            return View(produto);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Produtos/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome")] Categoria categoria)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,FornecedorId,CategoriaId")] Produto produto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(categoria).State = EntityState.Modified;
+                db.Entry(produto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(categoria);
+            ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome", produto.CategoriaId);
+            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
+            return View(produto);
         }
 
-        // GET: Categorias/Delete/5
+        // GET: Produtos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Produto produto = db.Produtos.Find(id);
+            if (produto == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            return View(produto);
         }
 
-        // POST: Categorias/Delete/5
+        // POST: Produtos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Categoria categoria = db.Categorias.Find(id);
-            db.Categorias.Remove(categoria);
+            Produto produto = db.Produtos.Find(id);
+            db.Produtos.Remove(produto);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
