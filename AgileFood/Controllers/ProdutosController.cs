@@ -21,35 +21,20 @@ namespace AgileFood.Controllers
             return View(produtos.ToList());
         }
 
-        // GET: Produtos/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(produto);
-        }
-
-        // GET: Produtos/Create
-        public ActionResult Create()
+        // GET: Produtos/Adicionar
+        public ActionResult Adicionar()
         {
             ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome");
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome");
             return View();
         }
 
-        // POST: Produtos/Create
+        // POST: Produtos/Adicionar
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,FornecedorId,CategoriaId")] Produto produto)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,FornecedorId,CategoriaId")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -63,8 +48,8 @@ namespace AgileFood.Controllers
             return View(produto);
         }
 
-        // GET: Produtos/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Produtos/Editar/5
+        public ActionResult Editar(int? id)
         {
             if (id == null)
             {
@@ -80,12 +65,12 @@ namespace AgileFood.Controllers
             return View(produto);
         }
 
-        // POST: Produtos/Edit/5
+        // POST: Produtos/Editar/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,FornecedorId,CategoriaId")] Produto produto)
+        public ActionResult Editar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,FornecedorId,CategoriaId")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -98,8 +83,8 @@ namespace AgileFood.Controllers
             return View(produto);
         }
 
-        // GET: Produtos/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Produtos/Deletar/5
+        public ActionResult Deletar(int? id)
         {
             if (id == null)
             {
@@ -114,9 +99,9 @@ namespace AgileFood.Controllers
         }
 
         // POST: Produtos/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Confirmar(int id)
         {
             Produto produto = db.Produtos.Find(id);
             db.Produtos.Remove(produto);

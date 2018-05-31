@@ -20,33 +20,18 @@ namespace AgileFood.Controllers
             return View(db.Categorias.ToList());
         }
 
-        // GET: Categorias/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
-            {
-                return HttpNotFound();
-            }
-            return View(categoria);
-        }
-
-        // GET: Categorias/Create
-        public ActionResult Create()
+        // GET: Categorias/Adicionar
+        public ActionResult Adicionar()
         {
             return View();
         }
 
-        // POST: Categorias/Create
+        // POST: Categorias/Adicionar
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome")] Categoria categoria)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +43,8 @@ namespace AgileFood.Controllers
             return View(categoria);
         }
 
-        // GET: Categorias/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Categorias/Editar/5
+        public ActionResult Editar(int? id)
         {
             if (id == null)
             {
@@ -73,12 +58,12 @@ namespace AgileFood.Controllers
             return View(categoria);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Categorias/Editar/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome")] Categoria categoria)
+        public ActionResult Editar([Bind(Include = "Id,Nome")] Categoria categoria)
         {
             if (ModelState.IsValid)
             {
@@ -89,8 +74,8 @@ namespace AgileFood.Controllers
             return View(categoria);
         }
 
-        // GET: Categorias/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Categorias/Deletar/5
+        public ActionResult Deletar(int? id)
         {
             if (id == null)
             {
@@ -104,10 +89,10 @@ namespace AgileFood.Controllers
             return View(categoria);
         }
 
-        // POST: Categorias/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Categorias/Deletar/5
+        [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Confirmar(int id)
         {
             Categoria categoria = db.Categorias.Find(id);
             db.Categorias.Remove(categoria);

@@ -20,33 +20,18 @@ namespace AgileFood.Controllers
             return View(db.Usuarios.ToList());
         }
 
-        // GET: Usuarios/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Usuario usuario = db.Usuarios.Find(id);
-            if (usuario == null)
-            {
-                return HttpNotFound();
-            }
-            return View(usuario);
-        }
-
-        // GET: Usuarios/Create
-        public ActionResult Create()
+        // GET: Usuarios/Cadastrar
+        public ActionResult Cadastrar()
         {
             return View();
         }
 
-        // POST: Usuarios/Create
+        // POST: Usuarios/Cadastrar
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,CPF,Email,Senha,Telefone,Tipo")] Usuario usuario)
+        public ActionResult Cadastrar([Bind(Include = "Id,Nome,CPF,Email,Senha,Telefone,Tipo")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +43,8 @@ namespace AgileFood.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Usuarios/Editar/5
+        public ActionResult Editar(int? id)
         {
             if (id == null)
             {
@@ -73,12 +58,12 @@ namespace AgileFood.Controllers
             return View(usuario);
         }
 
-        // POST: Usuarios/Edit/5
+        // POST: Usuarios/Editar/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,CPF,Email,Senha,Telefone,Tipo")] Usuario usuario)
+        public ActionResult Editar([Bind(Include = "Id,Nome,CPF,Email,Senha,Telefone,Tipo")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
@@ -89,8 +74,8 @@ namespace AgileFood.Controllers
             return View(usuario);
         }
 
-        // GET: Usuarios/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Usuarios/Deletar/5
+        public ActionResult Deletar(int? id)
         {
             if (id == null)
             {
@@ -104,10 +89,10 @@ namespace AgileFood.Controllers
             return View(usuario);
         }
 
-        // POST: Usuarios/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Usuarios/Deletar/5
+        [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Confirmar(int id)
         {
             Usuario usuario = db.Usuarios.Find(id);
             db.Usuarios.Remove(usuario);

@@ -20,33 +20,18 @@ namespace AgileFood.Controllers
             return View(db.Fornecedores.ToList());
         }
 
-        // GET: Fornecedores/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Fornecedor fornecedor = db.Fornecedores.Find(id);
-            if (fornecedor == null)
-            {
-                return HttpNotFound();
-            }
-            return View(fornecedor);
-        }
-
-        // GET: Fornecedores/Create
-        public ActionResult Create()
+        // GET: Fornecedores/Adicionar
+        public ActionResult Adicionar()
         {
             return View();
         }
 
-        // POST: Fornecedores/Create
+        // POST: Fornecedores/Adicionar
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
@@ -58,8 +43,8 @@ namespace AgileFood.Controllers
             return View(fornecedor);
         }
 
-        // GET: Fornecedores/Edit/5
-        public ActionResult Edit(int? id)
+        // GET: Fornecedores/Editar/5
+        public ActionResult Editar(int? id)
         {
             if (id == null)
             {
@@ -73,12 +58,12 @@ namespace AgileFood.Controllers
             return View(fornecedor);
         }
 
-        // POST: Fornecedores/Edit/5
+        // POST: Fornecedores/Editar/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
+        public ActionResult Editar([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
@@ -89,8 +74,8 @@ namespace AgileFood.Controllers
             return View(fornecedor);
         }
 
-        // GET: Fornecedores/Delete/5
-        public ActionResult Delete(int? id)
+        // GET: Fornecedores/Deletar/5
+        public ActionResult Deletar(int? id)
         {
             if (id == null)
             {
@@ -104,10 +89,10 @@ namespace AgileFood.Controllers
             return View(fornecedor);
         }
 
-        // POST: Fornecedores/Delete/5
-        [HttpPost, ActionName("Delete")]
+        // POST: Fornecedores/Deletar/5
+        [HttpPost, ActionName("Deletar")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Confirmar(int id)
         {
             Fornecedor fornecedor = db.Fornecedores.Find(id);
             db.Fornecedores.Remove(fornecedor);
