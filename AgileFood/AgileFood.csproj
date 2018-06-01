@@ -228,10 +228,6 @@
     <Content Include="Views\Categorias\Deletar.cshtml" />
     <Content Include="Views\Categorias\Editar.cshtml" />
     <Content Include="Views\Categorias\Index.cshtml" />
-    <Content Include="Views\Fornecedores\Adicionar.cshtml" />
-    <Content Include="Views\Fornecedores\Deletar.cshtml" />
-    <Content Include="Views\Fornecedores\Editar.cshtml" />
-    <Content Include="Views\Fornecedores\Index.cshtml" />
     <Content Include="Views\Itens\Create.cshtml" />
     <Content Include="Views\Itens\Delete.cshtml" />
     <Content Include="Views\Itens\Details.cshtml" />
@@ -250,6 +246,10 @@
     <Content Include="Views\Usuarios\Deletar.cshtml" />
     <Content Include="Views\Usuarios\Editar.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Fornecedores\Adicionar.cshtml" />
+    <Content Include="Views\Fornecedores\Deletar.cshtml" />
+    <Content Include="Views\Fornecedores\Editar.cshtml" />
+    <Content Include="Views\Fornecedores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -17,9 +17,10 @@ namespace AgileFood.Controllers
         // GET: Fornecedores
         public ActionResult Index()
         {
-            return View(db.Fornecedores.ToList());
+            var fornecedores = db.Fornecedores.Include(f => f.Responsavel);
+            return View(fornecedores.ToList());
         }
-
+        
         // GET: Fornecedores/Adicionar
         public ActionResult Adicionar()
         {
@@ -32,7 +33,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo,Responsavel_Id")] Fornecedor fornecedor)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo,ResponsavelId")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
@@ -41,6 +42,7 @@ namespace AgileFood.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios, "Id", "Nome", fornecedor.ResponsavelId);
             return View(fornecedor);
         }
 
@@ -56,6 +58,7 @@ namespace AgileFood.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios, "Id", "Nome", fornecedor.ResponsavelId);
             return View(fornecedor);
         }
 
@@ -64,7 +67,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
+        public ActionResult Editar([Bind(Include = "Id,Nome,CNPJ,Ativo,ResponsavelId")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
@@ -72,6 +75,7 @@ namespace AgileFood.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios, "Id", "Nome", fornecedor.ResponsavelId);
             return View(fornecedor);
         }
 
