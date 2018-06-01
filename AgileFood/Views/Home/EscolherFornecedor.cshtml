@@ -1,0 +1,57 @@
+﻿@model AgileFood.Models.Fornecedor
+
+<link href="~/Content/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Criar Produto</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome)
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Criar Produto" class="btn btn-default" onclick="SalvarProduto()" />
+                </div>
+            </div>*@
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Cancelar", "Index")
+</div>
+
+@RenderSection("scripts", required: false)
+
+@*<script type="text/javascript">
+        function SalvarProduto() {
+            var pnome = $("#Nome").val();
+            var ppreco = $("#Preco").val();
+            var pqtde = $("#Quantidade").val();
+
+            var produto = {
+                "Nome": pnome, "Preco": ppreco,
+                "Quantidade": pqtde
+            };
+
+            $.post('/produtos/Create', produto,
+                function (data) { if (data == 0) { location = location.href; } }, 'json');
+
+        }
+    </script>*@

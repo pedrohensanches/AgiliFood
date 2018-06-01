@@ -39,6 +39,10 @@ namespace AgileFood.Controllers
         // GET: Pedidos/Adicionar
         public ActionResult Adicionar()
         {
+            Fornecedor fornecedor = TempData["Fornecedor"] as Fornecedor;
+            ViewBag.Produtos = new SelectList(db.Produtos.
+                Where(g => (g.Fornecedor.Id == fornecedor.Id) && (g.Disponivel)), "Id", "Nome");
+
             ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome");
             return View();
         }

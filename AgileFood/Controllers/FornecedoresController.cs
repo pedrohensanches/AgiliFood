@@ -24,7 +24,7 @@ namespace AgileFood.Controllers
         // GET: Fornecedores/Adicionar
         public ActionResult Adicionar()
         {
-            ViewBag.ResponsavelId = new SelectList(db.Usuarios.Where(x => x.Tipo == TipoDeUsuario.Fornecedor ), "Id", "Nome");
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios.Where(x => x.Tipo == TipoDeUsuario.Fornecedor), "Id", "Nome");
             return View();
         }
 

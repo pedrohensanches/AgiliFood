@@ -295,6 +295,7 @@
     <Content Include="Views\Fornecedores\Deletar.cshtml" />
     <Content Include="Views\Fornecedores\Editar.cshtml" />
     <Content Include="Views\Fornecedores\Index.cshtml" />
+    <Content Include="Views\Home\EscolherFornecedor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

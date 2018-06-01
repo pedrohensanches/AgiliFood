@@ -1,11 +1,32 @@
-﻿@{
+﻿@model IEnumerable<AgileFood.Models.Fornecedor>
+
+@section Scripts {
+    <script type="text/javascript">
+        function OpenCreatePopup() {
+            var div = $("#popup-escolher-fornecedor");
+            div.dialog({
+                modal: true,
+                width: 320,
+                height: 400,
+                title: "Escolha o Restaurante",
+                resizable: false
+            });
+        }
+    </script>
+
+}
+
+@{
     ViewBag.Title = "Início";
 }
 
 <div>
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <p><a onclick="OpenCreatePopup()" class="btn btn-primary btn-lg">Fazer Pedido</a></p>
+    <div style="padding:7px 0;">
+        <input type="button" value="Fazer Pedido" onclick="OpenCreatePopup()" />
+    </div>
 </div>
 
 <div class="row">
@@ -28,4 +49,28 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
+</div>
+
+<div id="popup-escolher-fornecedor">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Escolher", "Escolher", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
 </div>
