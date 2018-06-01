@@ -20,11 +20,11 @@ namespace AgileFood.Controllers
             var fornecedores = db.Fornecedores.Include(f => f.Responsavel);
             return View(fornecedores.ToList());
         }
-        
+
         // GET: Fornecedores/Adicionar
         public ActionResult Adicionar()
         {
-            ViewBag.ResponsavelId = new SelectList(db.Usuarios, "Id", "Nome");
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios.Where(x => x.Tipo == TipoDeUsuario.Fornecedor ), "Id", "Nome");
             return View();
         }
 
@@ -58,7 +58,7 @@ namespace AgileFood.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ResponsavelId = new SelectList(db.Usuarios, "Id", "Nome", fornecedor.ResponsavelId);
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios.Where(x => x.Tipo == TipoDeUsuario.Fornecedor), "Id", "Nome");
             return View(fornecedor);
         }
 
@@ -113,5 +113,17 @@ namespace AgileFood.Controllers
             }
             base.Dispose(disposing);
         }
+
+        [HttpPost]
+        public JsonResult PesquisarUsuario(string pesquisa)
+        {
+            List<Usuario> resultado = db.Usuarios.Where(x => x.Nome.StartsWith(pesquisa)).Select(x => new Usuario
+            {
+                Id = x.Id,
+                Nome = x.Nome
+            }).ToList();
+            return new JsonResult { Data = resultado, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
     }
 }
