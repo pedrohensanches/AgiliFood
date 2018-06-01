@@ -23,6 +23,7 @@ namespace AgileFood.Controllers
         // GET: Fornecedores/Adicionar
         public ActionResult Adicionar()
         {
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios, "Id", "Nome");
             return View();
         }
 
@@ -31,7 +32,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo,Responsavel_Id")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {

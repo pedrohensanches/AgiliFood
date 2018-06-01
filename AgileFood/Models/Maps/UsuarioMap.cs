@@ -39,9 +39,12 @@ namespace AgileFood.Models.Maps
 
             Property(x => x.Tipo)
                 .IsRequired();
-            
-            HasOptional(x => x.Fornecedor)
-                .WithOptionalPrincipal(l => l.Responsavel);
+
+            //HasRequired(x => x.Fornecedor)
+            //    .WithRequiredPrincipal(a => a.Responsavel);
+
+            //HasOptional(x => x.Fornecedor)
+            //    .WithOptionalPrincipal(l => l.Responsavel);
 
         }
     }

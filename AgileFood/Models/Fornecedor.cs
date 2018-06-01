@@ -14,6 +14,7 @@ namespace AgileFood.Models
         public string Nome { get; set; }
         public string CNPJ { get; set; }
         public bool Ativo { get; set; }
+        public int ResponsavelId { get; set; }
 
         public virtual Usuario Responsavel { get; set; }
         public virtual ICollection<Produto> Produtos { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using System.Web;
 
@@ -9,7 +10,8 @@ namespace AgileFood.Models
     public class AgiliFoodContext : DbContext
     {
 
-        public AgiliFoodContext() : base("name=AgiliFoodContext") {
+        public AgiliFoodContext() : base("name=AgiliFoodContext")
+        {
             //Database.SetInitializer<AgiliFoodContext>(null);
         }
 
@@ -30,6 +32,7 @@ namespace AgileFood.Models
             modelBuilder.Configurations.Add(new Maps.PedidoMap());
             modelBuilder.Configurations.Add(new Maps.ProdutoMap());
             modelBuilder.Configurations.Add(new Maps.UsuarioMap());
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
     }

@@ -29,6 +29,24 @@ namespace AgileFood.Models.Maps
             Property(x => x.Ativo)
                 .IsRequired();
 
+            HasRequired(x => x.Responsavel)
+                .WithMany()
+                .HasForeignKey(c => c.ResponsavelId);
+
+            //HasRequired(x => x.Responsavel)
+            //    .WithMany()
+            //    .HasForeignKey(c => c.ResponsavelId);
+
+            //HasOptional(x => x.Responsavel)
+            //.WithOptionalDependent(c => c.Fornecedor)
+            //.WillCascadeOnDelete(false);
+
+            //Property(x => x.ResponsavelId)
+            //    .IsRequired();
+
+            //HasRequired(x => x.Responsavel)
+            //    .WithOptional(x => x.Fornecedor);
+
         }
     }
 }

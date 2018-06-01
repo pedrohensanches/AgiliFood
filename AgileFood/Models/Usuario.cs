@@ -24,7 +24,7 @@ namespace AgileFood.Models
         public string Senha { get; set; }
         public string Telefone { get; set; }
         public TipoDeUsuario Tipo { get; set; }
-
+        
         public virtual Fornecedor Fornecedor { get; set; }
         public virtual ICollection<Pedido> Pedidos { get; set; }
     }
