@@ -10,7 +10,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Cardápio</h4>
         <hr />
@@ -38,7 +38,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SegundaFeira, "Segunda-Feira", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SegundaFeira, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.SegundaFeira, new { @class = "form-control", @rows = 3, style = "width: 100%" })
                 @Html.ValidationMessageFor(model => model.SegundaFeira, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -46,7 +46,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TercaFeira, "Terça-Feira", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TercaFeira, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.TercaFeira, new { @class = "form-control", @rows = 3, style = "width: 100%" })
                 @Html.ValidationMessageFor(model => model.TercaFeira, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -54,7 +54,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.QuartaFeira, "Quarta-Feira", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.QuartaFeira, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.QuartaFeira, new { @class = "form-control", @rows = 3, style = "width: 100%" })
                 @Html.ValidationMessageFor(model => model.QuartaFeira, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.QuintaFeira, "Quinta-Feira", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.QuintaFeira, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.QuintaFeira, new { @class = "form-control", @rows = 3, style = "width: 100%" })
                 @Html.ValidationMessageFor(model => model.QuintaFeira, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -70,7 +70,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.SextaFeira, "Sexta-Feira", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.SextaFeira, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.SextaFeira, new { @class = "form-control", @rows = 3, style = "width: 100%" })
                 @Html.ValidationMessageFor(model => model.SextaFeira, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -78,7 +78,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Sabado, "Sábado", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Sabado, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Sabado, new { @class = "form-control", @rows = 3, style = "width: 100%" })
                 @Html.ValidationMessageFor(model => model.Sabado, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -86,7 +86,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Domingo, "Domingo", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Domingo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.Domingo, new { @class = "form-control", @rows = 3, style = "width: 100%" })
                 @Html.ValidationMessageFor(model => model.Domingo, "", new { @class = "text-danger" })
             </div>
         </div>
