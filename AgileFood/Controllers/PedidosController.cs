@@ -40,10 +40,17 @@ namespace AgileFood.Controllers
         public ActionResult Adicionar()
         {
             Fornecedor fornecedor = TempData["Fornecedor"] as Fornecedor;
-            ViewBag.Produtos = new SelectList(db.Produtos.
-                Where(g => (g.Fornecedor.Id == fornecedor.Id) && (g.Disponivel)), "Id", "Nome");
+
+            if (fornecedor == null)
+            {
+                return RedirectToAction("Index", "Pedidos");
+            }
+
+            ViewBag.Produtos = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) && (g.Disponivel)).ToList();
 
             ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome");
+
+            ViewBag.FornecedorNome = fornecedor.Nome;
             return View();
         }
 
@@ -56,6 +63,7 @@ namespace AgileFood.Controllers
         {
             if (ModelState.IsValid)
             {
+                pedido.DataDeRegistro = DateTime.Now;
                 db.Pedidos.Add(pedido);
                 db.SaveChanges();
                 return RedirectToAction("Index");

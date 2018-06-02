@@ -28,13 +28,7 @@ namespace AgileFood.Controllers
 
             TempData["Fornecedor"] = fornecedor;
             return RedirectToAction("Adicionar", "Pedidos");
-            //return RedirectToAction("Adicionar", "Pedidos", fornecedor);
         }
-
-        //public ActionResult Escolher(Fornecedor fornecedor)
-        //{
-        //    return RedirectToAction("Editar", "Fornecedores", fornecedor);
-        //}
 
     }
 }
