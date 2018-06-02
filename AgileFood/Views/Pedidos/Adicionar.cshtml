@@ -12,7 +12,15 @@
 
     <div class="form-horizontal">
         <h4>@Html.Raw(ViewBag.FornecedorNome)</h4>
-        <hr />
+        <div style="width: 100%;display: inline-block;">
+            @foreach (Tuple<string, string> dia in ViewBag.Cardapio)
+            {
+                <div class="dia-cardapio col-md-2">
+                    <h4>@dia.Item1</h4>
+                    @dia.Item2
+                </div>
+            }
+        </div>
 
         <div id="cardapio-itens" class="col-md-6">
             <h3>Marmitex</h3>

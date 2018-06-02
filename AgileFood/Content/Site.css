@@ -22,3 +22,20 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.dia-cardapio {
+    border-width: 1px;
+    border-color: #ddd;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 3px;
+    min-height: 150px;
+    float: left;
+}
+
+@media (max-width: 900px) {
+    .dia-cardapio {
+        min-height: 120px;
+    }
+}

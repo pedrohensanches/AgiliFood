@@ -47,10 +47,10 @@ namespace AgileFood.Controllers
             }
 
             ViewBag.Produtos = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) && (g.Disponivel)).ToList();
+            ViewBag.Cardapio = GetCardapioDaSemana(fornecedor.Id);
+            ViewBag.FornecedorNome = fornecedor.Nome;
 
             ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome");
-
-            ViewBag.FornecedorNome = fornecedor.Nome;
             return View();
         }
 
@@ -130,6 +130,44 @@ namespace AgileFood.Controllers
             db.Pedidos.Remove(pedido);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private List<Tuple<string, string>> GetCardapioDaSemana(int id)
+        {
+            Cardapio cardapio = (Cardapio)db.Cardapios.Where(g => (g.Fornecedor.Id == id) && (g.Ativo)).First();
+
+            List<Tuple<string, string>> lista = new List<Tuple<string, string>>();
+
+            if (cardapio.SegundaFeira != null)
+            {
+                lista.Add(new Tuple<string, string>("Segunda-Feira", cardapio.SegundaFeira));
+            }
+            if (cardapio.TercaFeira != null)
+            {
+                lista.Add(new Tuple<string, string>("Terça-Feira", cardapio.TercaFeira));
+            }
+            if (cardapio.QuartaFeira != null)
+            {
+                lista.Add(new Tuple<string, string>("Quarta-Feira", cardapio.QuartaFeira));
+            }
+            if (cardapio.QuintaFeira != null)
+            {
+                lista.Add(new Tuple<string, string>("Quinta-Feira", cardapio.QuintaFeira));
+            }
+            if (cardapio.SextaFeira != null)
+            {
+                lista.Add(new Tuple<string, string>("Sexta-Feira", cardapio.SextaFeira));
+            }
+            if (cardapio.Sabado != null)
+            {
+                lista.Add(new Tuple<string, string>("Sábado", cardapio.Sabado));
+            }
+            if (cardapio.Domingo != null)
+            {
+                lista.Add(new Tuple<string, string>("Domingo", cardapio.Domingo));
+            }
+
+            return lista;
         }
 
         protected override void Dispose(bool disposing)
