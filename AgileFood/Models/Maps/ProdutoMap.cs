@@ -38,12 +38,8 @@ namespace AgileFood.Models.Maps
                 .WithMany(x => x.Produtos)
                 .HasForeignKey(c => c.FornecedorId);
 
-            Property(x => x.CategoriaId)
+            Property(x => x.Categoria)
                 .IsRequired();
-
-            HasRequired(x => x.Categoria)
-                .WithMany(x => x.Produtos)
-                .HasForeignKey(c => c.CategoriaId);
 
         }
     }

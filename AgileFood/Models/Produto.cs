@@ -2,6 +2,15 @@
 
 namespace AgileFood.Models
 {
+
+    public enum Categoria : int
+    {
+        Marmitex = 0,
+        Bebidas = 1,
+        Sobremesas = 2,
+        Outros = 3
+    }
+
     public class Produto
     {
         public Produto()
@@ -15,10 +24,9 @@ namespace AgileFood.Models
         public double Valor { get; set; }
         public bool Disponivel { get; set; }
         public int FornecedorId { get; set; }
-        public int CategoriaId { get; set; }
-        
+        public Categoria Categoria { get; set; }
+
         public virtual Fornecedor Fornecedor { get; set; }
-        public virtual Categoria Categoria { get; set; }
         public virtual ICollection<ItemPedido> Itens { get; set; }
     }
 }

@@ -16,7 +16,6 @@ namespace AgileFood.Models
         }
 
         public DbSet<Cardapio> Cardapios { get; set; }
-        public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<ItemPedido> ItensDePedidos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
@@ -26,7 +25,6 @@ namespace AgileFood.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new Maps.CardapioMap());
-            modelBuilder.Configurations.Add(new Maps.CategoriaMap());
             modelBuilder.Configurations.Add(new Maps.FornecedorMap());
             modelBuilder.Configurations.Add(new Maps.ItemPedidoMap());
             modelBuilder.Configurations.Add(new Maps.PedidoMap());

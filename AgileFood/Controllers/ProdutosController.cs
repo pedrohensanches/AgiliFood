@@ -17,14 +17,13 @@ namespace AgileFood.Controllers
         // GET: Produtos
         public ActionResult Index()
         {
-            var produtos = db.Produtos.Include(p => p.Categoria).Include(p => p.Fornecedor);
+            var produtos = db.Produtos.Include(p => p.Fornecedor);
             return View(produtos.ToList());
         }
 
         // GET: Produtos/Adicionar
         public ActionResult Adicionar()
         {
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome");
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome");
             return View();
         }
@@ -34,7 +33,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adicionar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,FornecedorId,CategoriaId")] Produto produto)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,Categoria,FornecedorId")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -43,7 +42,6 @@ namespace AgileFood.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome", produto.CategoriaId);
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
@@ -60,7 +58,6 @@ namespace AgileFood.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome", produto.CategoriaId);
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
@@ -70,7 +67,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,FornecedorId,CategoriaId")] Produto produto)
+        public ActionResult Editar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,Categoria,FornecedorId")] Produto produto)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +75,6 @@ namespace AgileFood.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "Id", "Nome", produto.CategoriaId);
             ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }

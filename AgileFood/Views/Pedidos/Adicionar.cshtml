@@ -23,53 +23,73 @@
         </div>
 
         <div id="cardapio-itens" class="col-md-6">
-            <h3>Marmitex</h3>
-            <table class="table">
-                @foreach (AgileFood.Models.Produto produto in ViewBag.Produtos)
+            @{
+                if (ViewBag.Marmitex.Count != 0)
                 {
-                    <tr>
-                        <td>@produto.Nome</td>
-                        <td>R$ @produto.Valor</td>
-                        <td>@Html.ActionLink("Adicionar", "Adicionar", new { id = produto.Id })</td>
-                    </tr>
+                    <h3>Marmitex</h3>
+                    <table class="table">
+                        @foreach (AgileFood.Models.Produto produto in ViewBag.Marmitex)
+                        {
+                            <tr>
+                                <td>@produto.Nome</td>
+                                <td>R$ @produto.Valor</td>
+                                <td>@Html.ActionLink("Adicionar", "Adicionar", new { id = produto.Id })</td>
+                            </tr>
+                        }
+                    </table>
                 }
-            </table>
+            }
 
-            <h3>Bebidas</h3>
-            <table class="table">
-                @foreach (AgileFood.Models.Produto produto in ViewBag.Produtos)
+            @{
+                if (ViewBag.Bebidas.Count != 0)
                 {
-                    <tr>
-                        <td>@produto.Nome</td>
-                        <td>R$ @produto.Valor</td>
-                        <td>@Html.ActionLink("Adicionar", "Adicionar", new { id = produto.Id })</td>
-                    </tr>
+                    <h3>Bebidas</h3>
+                    <table class="table">
+                        @foreach (AgileFood.Models.Produto produto in ViewBag.Bebidas)
+                        {
+                            <tr>
+                                <td>@produto.Nome</td>
+                                <td>R$ @produto.Valor</td>
+                                <td>@Html.ActionLink("Adicionar", "Adicionar", new { id = produto.Id })</td>
+                            </tr>
+                        }
+                    </table>
                 }
-            </table>
+            }
 
-            <h3>Sobremesas</h3>
-            <table class="table">
-                @foreach (AgileFood.Models.Produto produto in ViewBag.Produtos)
+            @{
+                if (ViewBag.Sobremesas.Count != 0)
                 {
-                    <tr>
-                        <td>@produto.Nome</td>
-                        <td>R$ @produto.Valor</td>
-                        <td>@Html.ActionLink("Adicionar", "Adicionar", new { id = produto.Id })</td>
-                    </tr>
+                    <h3>Sobremesas</h3>
+                    <table class="table">
+                        @foreach (AgileFood.Models.Produto produto in ViewBag.Sobremesas)
+                        {
+                            <tr>
+                                <td>@produto.Nome</td>
+                                <td>R$ @produto.Valor</td>
+                                <td>@Html.ActionLink("Adicionar", "Adicionar", new { id = produto.Id })</td>
+                            </tr>
+                        }
+                    </table>
                 }
-            </table>
+            }
 
-            <h3>Outros</h3>
-            <table class="table">
-                @foreach (AgileFood.Models.Produto produto in ViewBag.Produtos)
+            @{
+                if (ViewBag.Outros.Count != 0)
                 {
-                    <tr>
-                        <td>@produto.Nome</td>
-                        <td>R$ @produto.Valor</td>
-                        <td>@Html.ActionLink("Adicionar", "Adicionar", new { id = produto.Id })</td>
-                    </tr>
+                    <h3>Outros</h3>
+                    <table class="table">
+                        @foreach (AgileFood.Models.Produto produto in ViewBag.Outros)
+                        {
+                            <tr>
+                                <td>@produto.Nome</td>
+                                <td>R$ @produto.Valor</td>
+                                <td>@Html.ActionLink("Adicionar", "Adicionar", new { id = produto.Id })</td>
+                            </tr>
+                        }
+                    </table>
                 }
-            </table>
+            }
         </div>
 
         <div id="outro" class="col-md-6">

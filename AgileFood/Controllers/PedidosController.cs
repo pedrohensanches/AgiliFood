@@ -46,11 +46,18 @@ namespace AgileFood.Controllers
                 return RedirectToAction("Index", "Pedidos");
             }
 
-            ViewBag.Produtos = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) && (g.Disponivel)).ToList();
+            ViewBag.Marmitex = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
+            (g.Disponivel) && (g.Categoria == Categoria.Marmitex)).ToList();
+            ViewBag.Bebidas = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
+            (g.Disponivel) && (g.Categoria == Categoria.Bebidas)).ToList();
+            ViewBag.Sobremesas = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
+            (g.Disponivel) && (g.Categoria == Categoria.Sobremesas)).ToList();
+            ViewBag.Outros = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
+            (g.Disponivel) && (g.Categoria == Categoria.Outros)).ToList();
             ViewBag.Cardapio = GetCardapioDaSemana(fornecedor.Id);
             ViewBag.FornecedorNome = fornecedor.Nome;
-
             ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome");
+
             return View();
         }
 

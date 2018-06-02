@@ -24,18 +24,30 @@ textarea {
 }
 
 .dia-cardapio {
-    border-width: 1px;
-    border-color: #ddd;
+    border-width: 2px;
+    border-color: #333;
     border-style: solid;
     border-radius: 5px;
     padding: 10px 15px;
-    margin: 3px;
+    margin: 0px 6px 6px 0px;
     min-height: 150px;
     float: left;
+    background-color: aliceblue;
+}
+
+#cardapio-itens {
+    border-width: 2px;
+    border-color: #333;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    background: aliceblue;
 }
 
 @media (max-width: 900px) {
     .dia-cardapio {
         min-height: 120px;
+        min-width: 155px;
     }
 }

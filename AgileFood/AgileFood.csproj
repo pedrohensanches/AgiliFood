@@ -155,7 +155,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CardapiosController.cs" />
-    <Compile Include="Controllers\CategoriasController.cs" />
     <Compile Include="Controllers\FornecedoresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItensController.cs" />
@@ -167,11 +166,9 @@
     </Compile>
     <Compile Include="Models\AgiliFoodContext.cs" />
     <Compile Include="Models\Cardapio.cs" />
-    <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Fornecedor.cs" />
     <Compile Include="Models\ItemPedido.cs" />
     <Compile Include="Models\Maps\CardapioMap.cs" />
-    <Compile Include="Models\Maps\CategoriaMap.cs" />
     <Compile Include="Models\Maps\FornecedorMap.cs" />
     <Compile Include="Models\Maps\ItemPedidoMap.cs" />
     <Compile Include="Models\Maps\PedidoMap.cs" />
@@ -269,10 +266,6 @@
     <Content Include="Views\Cardapios\Details.cshtml" />
     <Content Include="Views\Cardapios\Editar.cshtml" />
     <Content Include="Views\Cardapios\Index.cshtml" />
-    <Content Include="Views\Categorias\Adicionar.cshtml" />
-    <Content Include="Views\Categorias\Deletar.cshtml" />
-    <Content Include="Views\Categorias\Editar.cshtml" />
-    <Content Include="Views\Categorias\Index.cshtml" />
     <Content Include="Views\Itens\Create.cshtml" />
     <Content Include="Views\Itens\Delete.cshtml" />
     <Content Include="Views\Itens\Details.cshtml" />
