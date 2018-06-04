@@ -33,16 +33,21 @@ textarea {
     min-height: 150px;
     float: left;
     background-color: aliceblue;
+    width: 16.20%;
 }
 
-#cardapio-itens {
-    border-width: 2px;
-    border-color: #333;
-    border-style: solid;
-    border-radius: 5px;
+    .dia-cardapio:last-child {
+        margin-right: 0px;
+    }
+
+#cardapio-semana {
+    width: 100%;
+    display: inline-block;
+}
+
+#produtos-cardapio, #seu-pedido {
     padding: 10px 15px;
     margin-top: 10px;
-    background: aliceblue;
 }
 
 @media (max-width: 900px) {
