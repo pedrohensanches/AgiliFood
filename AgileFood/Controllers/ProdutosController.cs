@@ -10,7 +10,7 @@ using AgileFood.Models;
 
 namespace AgileFood.Controllers
 {
-    public class ProdutosController : Controller
+    public class ProdutosController : BaseController
     {
         private AgiliFoodContext db = new AgiliFoodContext();
 

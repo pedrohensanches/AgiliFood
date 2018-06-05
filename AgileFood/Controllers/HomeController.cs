@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace AgileFood.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
 
         private AgiliFoodContext db = new AgiliFoodContext();
