@@ -191,7 +191,16 @@ namespace AgileFood.Controllers
             {
                 Id = id
             };
-            pedido.Itens.Remove(pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)));
+
+            if (pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)).Quantidade > 1)
+            {
+                pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)).Quantidade -= 1;
+            }
+            else
+            {
+                pedido.Itens.Remove(pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)));
+            }
+
             Session["Pedido"] = pedido;
             return PartialView("_ItensDoPedido", pedido);
         }
