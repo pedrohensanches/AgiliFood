@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AgileFood.Models;
+using AgileFood.Repositorios;
 
 namespace AgileFood.Controllers
 {
@@ -68,6 +69,9 @@ namespace AgileFood.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Adicionar([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
         {
+
+            pedido = (Pedido)Session["Pedido"];
+
             if (ModelState.IsValid)
             {
                 pedido.DataDeRegistro = DateTime.Now;
@@ -139,37 +143,37 @@ namespace AgileFood.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpPost]
-        //public PartialViewResult AdicionarProdutoAoPedido(int id)
-        //{
-        //    if (itens == null) { itens = new List<ItemPedido>(); }
-        //    itens.Add(new ItemPedido()
-        //    {
-        //        PedidoId = 1,
-        //        Produto = db.Produtos.Find(id),
-        //        Quantidade = 3
-        //    });
-        //    return PartialView("_ItensDoPedido", itens);
-        //}
-
-
         public PartialViewResult AdicionarProdutoAoPedido(int id)
         {
-            Pedido pedido = Session["Pedido"] != null ? (Pedido)Session["Pedido"] : new Pedido();
+
+            bool novoPedido = Session["Pedido"] == null ? true : false;
+
+            Pedido pedido = novoPedido ? new Pedido() : (Pedido)Session["Pedido"];
+            if (novoPedido)
+            {
+                Usuario usuarioLogado = RepositorioUsuarios.UsuarioLogado();
+                pedido.Funcionario = usuarioLogado;
+                pedido.FuncionarioId = usuarioLogado.Id;
+            }
 
             var produto = db.Produtos.Find(id);
 
             if (produto != null)
             {
-                var itemPedido = new ItemPedido();
-                itemPedido.Produto = produto;
-                itemPedido.Quantidade = 1;
-
-                if (pedido.Itens.FirstOrDefault(x => x.ProdutoId == produto.Id) != null)
+                var itemPedido = new ItemPedido
                 {
-                    pedido.Itens.FirstOrDefault(x => x.ProdutoId == produto.Id).Quantidade += 1;
-                }
+                    Produto = produto,
+                    ProdutoId = produto.Id,
+                    Pedido = pedido,
+                    PedidoId = pedido.Id,
+                    Quantidade = 1
 
+                };
+
+                if (pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)) != null)
+                {
+                    pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)).Quantidade += 1;
+                }
                 else
                 {
                     pedido.Itens.Add(itemPedido);
@@ -179,7 +183,6 @@ namespace AgileFood.Controllers
             }
 
             return PartialView("_ItensDoPedido", pedido);
-            //return RedirectToAction("Carrinho");
         }
 
         private List<Tuple<string, string>> GetCardapioDaSemana(int id)

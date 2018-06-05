@@ -69,5 +69,18 @@ namespace AgileFood.Repositorios
             }
         }
 
+        public static Usuario UsuarioLogado()
+        {
+            var Usuario = HttpContext.Current.Request.Cookies["UserCookieAuthentication"];
+            if (Usuario != null)
+            {
+                int iDUsuario = Convert.ToInt32(RepositorioCriptografia.Descriptografar(Usuario.Values["IDUsuario"]));
+
+                var usuarioRetornado = RecuperaUsuarioPorID(iDUsuario);
+                return usuarioRetornado;
+            }
+            return null;
+        }
+
     }
 }

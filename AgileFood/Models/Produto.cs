@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AgileFood.Models
 {
@@ -28,5 +29,26 @@ namespace AgileFood.Models
 
         public virtual Fornecedor Fornecedor { get; set; }
         public virtual ICollection<ItemPedido> Itens { get; set; }
+
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (!(obj is Produto p2))
+            {
+                return false;
+            }
+
+            if (base.Equals(obj))
+            {
+                return true;
+            }
+
+            return this.Id == p2.Id;
+        }
+
     }
 }
