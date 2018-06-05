@@ -14,7 +14,9 @@
             <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
             <td>@Html.DisplayFor(modelItem => item.Produto.Nome)</td>
             <td style="width: 75px;">R$ @Html.DisplayFor(modelItem => item.Produto.Valor)</td>
-            <td><input type="button" value="-" /></td>
+            <td>
+                <input type="button" value="-" onclick="delProduto(@item.Produto.Id);" />
+            </td>
         </tr>
     }
     <tr>
@@ -24,3 +26,14 @@
         <td></td>
     </tr>
 </table>
+
+<script type="text/javascript">
+
+    function delProduto(produto) {
+        $.post("/Pedidos/RemoverProdutoDoPedido", { "id": produto },
+            function (data) {
+                $('#itens-pedido').html(data);
+            });
+    }
+
+</script>

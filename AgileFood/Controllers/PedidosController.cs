@@ -70,7 +70,9 @@ namespace AgileFood.Controllers
         public ActionResult Adicionar([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
         {
 
-            pedido = (Pedido)Session["Pedido"];
+            string observacoes = pedido.Observacoes;
+            pedido = ((Pedido)Session["Pedido"]);
+            pedido.Observacoes = observacoes;
 
             if (ModelState.IsValid)
             {
@@ -153,7 +155,6 @@ namespace AgileFood.Controllers
             {
                 Usuario usuarioLogado = RepositorioUsuarios.UsuarioLogado();
                 pedido.Funcionario = usuarioLogado;
-                pedido.FuncionarioId = usuarioLogado.Id;
             }
 
             var produto = db.Produtos.Find(id);
@@ -163,9 +164,7 @@ namespace AgileFood.Controllers
                 var itemPedido = new ItemPedido
                 {
                     Produto = produto,
-                    ProdutoId = produto.Id,
                     Pedido = pedido,
-                    PedidoId = pedido.Id,
                     Quantidade = 1
 
                 };
@@ -182,6 +181,18 @@ namespace AgileFood.Controllers
                 Session["Pedido"] = pedido;
             }
 
+            return PartialView("_ItensDoPedido", pedido);
+        }
+
+        public PartialViewResult RemoverProdutoDoPedido(int id)
+        {
+            Pedido pedido = ((Pedido)Session["Pedido"]);
+            Produto produto = new Produto
+            {
+                Id = id
+            };
+            pedido.Itens.Remove(pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)));
+            Session["Pedido"] = pedido;
             return PartialView("_ItensDoPedido", pedido);
         }
 
