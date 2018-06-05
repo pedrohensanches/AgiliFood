@@ -13,7 +13,6 @@ namespace AgileFood.Controllers
     public class PedidosController : BaseController
     {
         private AgiliFoodContext db = new AgiliFoodContext();
-        private List<ItemPedido> itens;
 
         // GET: Pedidos
         public ActionResult Index()
@@ -140,17 +139,47 @@ namespace AgileFood.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
+        //[HttpPost]
+        //public PartialViewResult AdicionarProdutoAoPedido(int id)
+        //{
+        //    if (itens == null) { itens = new List<ItemPedido>(); }
+        //    itens.Add(new ItemPedido()
+        //    {
+        //        PedidoId = 1,
+        //        Produto = db.Produtos.Find(id),
+        //        Quantidade = 3
+        //    });
+        //    return PartialView("_ItensDoPedido", itens);
+        //}
+
+
         public PartialViewResult AdicionarProdutoAoPedido(int id)
         {
-            if (itens == null) { itens = new List<ItemPedido>(); }
-            itens.Add(new ItemPedido()
+            Pedido pedido = Session["Pedido"] != null ? (Pedido)Session["Pedido"] : new Pedido();
+
+            var produto = db.Produtos.Find(id);
+
+            if (produto != null)
             {
-                PedidoId = 1,
-                Produto = db.Produtos.Find(id),
-                Quantidade = 3
-            });
-            return PartialView("_ItensDoPedido", itens);
+                var itemPedido = new ItemPedido();
+                itemPedido.Produto = produto;
+                itemPedido.Quantidade = 1;
+
+                if (pedido.Itens.FirstOrDefault(x => x.ProdutoId == produto.Id) != null)
+                {
+                    pedido.Itens.FirstOrDefault(x => x.ProdutoId == produto.Id).Quantidade += 1;
+                }
+
+                else
+                {
+                    pedido.Itens.Add(itemPedido);
+                }
+
+                Session["Pedido"] = pedido;
+            }
+
+            return PartialView("_ItensDoPedido", pedido);
+            //return RedirectToAction("Carrinho");
         }
 
         private List<Tuple<string, string>> GetCardapioDaSemana(int id)

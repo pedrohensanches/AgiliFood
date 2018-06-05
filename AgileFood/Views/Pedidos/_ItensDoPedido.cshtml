@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AgileFood.Models.ItemPedido>
+﻿@model AgileFood.Models.Pedido
 
 <table class="table">
     <tr>
@@ -8,7 +8,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.Itens )
     {
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Produto.Nome)</td>

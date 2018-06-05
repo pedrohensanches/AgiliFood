@@ -31,7 +31,10 @@
                         <tr>
                             <td style="width: 75%">@produto.Nome</td>
                             <td style="text-align: right">R$ @produto.Valor</td>
-                            <td style="text-align: right">@Html.ActionLink("Adicionar", "AdicionarProdutoAoPedido", new { id = produto.Id })</td>
+                            <td style="text-align: right">
+                                <input type="button" value="+" onclick="addProduto(@produto.Id);" />
+                            </td>
+                            @*<td style="text-align: right">@Html.ActionLink("Adicionar", "AdicionarProdutoAoPedido", new { id = produto.Id })</td>*@
                         </tr>
                     }
                 </table>
@@ -48,7 +51,9 @@
                         <tr>
                             <td style="width: 75%">@produto.Nome</td>
                             <td style="text-align: right">R$ @produto.Valor</td>
-                            <td style="text-align: right">@Html.ActionLink("Adicionar", "AdicionarProdutoAoPedido", new { id = produto.Id })</td>
+                            <td style="text-align: right">
+                                <input type="button" value="+" onclick="addProduto(@produto.Id);" />
+                            </td>
                         </tr>
                     }
                 </table>
