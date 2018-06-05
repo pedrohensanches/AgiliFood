@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AgileFood.Models.ItemPedido>
+
+<table class="table">
+    <tr>
+        <th>Item</th>
+        <th>Quantidade</th>
+        <th>Valor</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Produto.Nome)</td>
+            <td>@Html.DisplayFor(modelItem => item.Quantidade)</td>
+            <td>R$ @Html.DisplayFor(modelItem => item.Produto.Valor)</td>
+            <td></td>
+        </tr>
+    }
+    <tr>
+        <td></td>
+        <td style="text-align: right;font-weight: bold;">Total:</td>
+        <td style="font-weight: bold">R$ </td>
+        <td></td>
+    </tr>
+</table>

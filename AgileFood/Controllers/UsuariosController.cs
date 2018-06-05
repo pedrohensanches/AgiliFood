@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AgileFood.Models;
+using AgileFood.Repositorios;
 
 namespace AgileFood.Controllers
 {
@@ -107,6 +108,19 @@ namespace AgileFood.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        [HttpGet]
+        public JsonResult AutenticacaoDeUsuario(string Email, string Senha)
+        {
+            if (RepositorioUsuarios.AutenticarUsuario(Email, Senha))
+            {
+                return Json(new { OK = true, Mensagem = "Usuário autenticado. Redirecionando..." }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { OK = false, Mensagem = "E-mail ou senha inválida, tente novamente!" }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

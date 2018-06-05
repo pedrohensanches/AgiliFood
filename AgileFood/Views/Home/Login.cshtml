@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AgiliFood - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/loginhome")
+    <style>
+        body {
+            padding-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">AgiliFood</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h2 style="margin-bottom: 15px">Quem é você?</h2>
+        <div id="status" style="width: 280px;font-size: 15px;padding: 8px 15px;" class="alert alert-info"></div>
+        <form id="form-login" name="form-login" method="get" action="javascript:function()">
+            <div style="margin-bottom: 10px">
+                <div>
+                    <label for="txtLogin">Login</label>
+                </div>
+                <div>
+                    <input class="input-login" type="text" id="txtLogin" name="txtLogin" />
+                </div>
+            </div>
+            <div style="margin-bottom: 10px">
+                <div>
+                    <label for="txtSenha">Senha</label>
+                </div>
+                <div>
+                    <input class="input-login" type="password" id="txtSenha" name="txtSenha" />
+                </div>
+            </div>
+            <div>
+                <a style="width: 280px" id="botao-entrar" class="btn btn-primary btn-lg">Entrar</a>
+            </div>
+        </form>
+        <p style="margin-top: 15px">
+            @Html.ActionLink("Esqueceu sua senha?", "EsqueceuSuaSenha", "Home", null, new { })
+        </p>
+    </div>
+</body>
+</html>

@@ -50,6 +50,15 @@ textarea {
     margin-top: 10px;
 }
 
+.input-login {
+    width: 280px;
+    height: 35px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #333;
+    border-radius: 5px;
+}
+
 @media (max-width: 900px) {
     .dia-cardapio {
         min-height: 120px;

@@ -32,7 +32,7 @@ namespace AgileFood.Models.Maps
 
             Property(x => x.Senha)
                 .IsRequired()
-                .HasMaxLength(15);
+                .HasMaxLength(50);
 
             Property(x => x.Telefone)
                 .HasMaxLength(15);

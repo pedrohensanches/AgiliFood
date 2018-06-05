@@ -30,5 +30,11 @@ namespace AgileFood.Controllers
             return RedirectToAction("Adicionar", "Pedidos");
         }
 
+        public ActionResult Login()
+        {
+            ViewBag.Title = "Seja bem vindo(a)!";
+            return View();
+        }
+
     }
 }

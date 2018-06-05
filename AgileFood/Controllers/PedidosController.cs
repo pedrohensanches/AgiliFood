@@ -13,7 +13,7 @@ namespace AgileFood.Controllers
     public class PedidosController : Controller
     {
         private AgiliFoodContext db = new AgiliFoodContext();
-        private List<Produto> produtos = new List<Produto>();
+        private List<ItemPedido> itens;
 
         // GET: Pedidos
         public ActionResult Index()
@@ -140,9 +140,17 @@ namespace AgileFood.Controllers
             return RedirectToAction("Index");
         }
 
-        public void AdicionarProdutoAoPedido(Produto produto)
+        [HttpPost]
+        public PartialViewResult AdicionarProdutoAoPedido(int id)
         {
-            produtos.Add(produto);
+            if (itens == null) { itens = new List<ItemPedido>(); }
+            itens.Add(new ItemPedido()
+            {
+                PedidoId = 1,
+                Produto = db.Produtos.Find(id),
+                Quantidade = 3
+            });
+            return PartialView("_ItensDoPedido", itens);
         }
 
         private List<Tuple<string, string>> GetCardapioDaSemana(int id)

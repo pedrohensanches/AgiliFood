@@ -65,7 +65,9 @@
                         <tr>
                             <td style="width: 75%">@produto.Nome</td>
                             <td style="text-align: right">R$ @produto.Valor</td>
-                            <td style="text-align: right">@Html.ActionLink("Adicionar", "AdicionarProdutoAoPedido", new { id = produto.Id })</td>
+                            <td style="text-align: right">
+                                <input type="button" value="+" onclick="addProduto(@produto.Id);" />
+                            </td>
                         </tr>
                     }
                 </table>
@@ -82,7 +84,9 @@
                         <tr>
                             <td style="width: 75%">@produto.Nome</td>
                             <td style="text-align: right">R$ @produto.Valor</td>
-                            <td style="text-align: right">@Html.ActionLink("Adicionar", "AdicionarProdutoAoPedido", new { id = produto.Id })</td>
+                            <td style="text-align: right">
+                                <input type="button" value="+" onclick="addProduto(@produto.Id);" />
+                            </td>
                         </tr>
                     }
                 </table>
@@ -92,8 +96,8 @@
 
     <div class="col-md-5">
         <div id="seu-pedido">
+            <h3>Seu pedido</h3>
             <div id="itens-pedido">
-                <h3>Seu pedido</h3>
                 <table class="table">
                     <tr>
                         <th>Item</th>
@@ -101,25 +105,8 @@
                         <th>Valor</th>
                         <th></th>
                     </tr>
-
-                    @*@foreach (var item in Model)
-                        {*@
-                    <tr>
-                        <td>Coca Cola - Lata 350ml 1</td>
-                        <td>3</td>
-                        <td>R$ 3.4</td>
-                        <td></td>
-                    </tr>
-                    @*}*@
-                    <tr>
-                        <td></td>
-                        <td style="text-align: right;font-weight: bold;">Total:</td>
-                        <td style="font-weight: bold">R$ </td>
-                        <td></td>
-                    </tr>
                 </table>
             </div>
-
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -148,3 +135,28 @@
         @Html.ValidationMessageFor(model => model.FuncionarioId, "", new { @class = "text-danger" })
     </div>
 </div>
+
+<script type="text/javascript">
+
+    function addProduto(produto) {
+        $.post("/Pedidos/AdicionarProdutoAoPedido", { "id": produto },
+            function (data) {
+                $('#itens-pedido').html(data);
+            });
+    }
+
+    //function addProduto() {
+    //    $.ajax(
+    //        {
+    //            type: 'POST',
+    //            url: '/Pedidos/AdicionarProdutoAoPedido',
+    //            dataType: 'html',
+    //            cache: false,
+    //            async: true,
+    //            success: function (data) {
+    //                $('#itens-pedido').html(data);
+    //            }
+    //        });
+    //}
+
+</script>
