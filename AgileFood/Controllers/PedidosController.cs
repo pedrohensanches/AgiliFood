@@ -154,7 +154,7 @@ namespace AgileFood.Controllers
 
         public PartialViewResult AdicionarProdutoAoPedido(int id)
         {
-            Pedido pedido = (Session["Pedido"] == null) ? new Pedido() : (Pedido)Session["Pedido"];
+            Pedido pedido = (Session["Pedido"] == null) ? new Pedido() { ValorTotal = 0 } : (Pedido)Session["Pedido"];
             var produto = db.Produtos.Find(id);
             if (produto != null)
             {
@@ -173,6 +173,7 @@ namespace AgileFood.Controllers
                 {
                     pedido.Itens.Add(itemPedido);
                 }
+                pedido.ValorTotal += produto.Valor;
                 Session["Pedido"] = pedido;
             }
             return PartialView("_ItensDoPedido", pedido);
@@ -185,7 +186,8 @@ namespace AgileFood.Controllers
             {
                 Id = id
             };
-            if (pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)).Quantidade > 1)
+            ItemPedido item = pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto));
+            if (item.Quantidade > 1)
             {
                 pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)).Quantidade -= 1;
             }
@@ -193,6 +195,7 @@ namespace AgileFood.Controllers
             {
                 pedido.Itens.Remove(pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)));
             }
+            pedido.ValorTotal -= item.Produto.Valor;
             Session["Pedido"] = pedido;
             return PartialView("_ItensDoPedido", pedido);
         }

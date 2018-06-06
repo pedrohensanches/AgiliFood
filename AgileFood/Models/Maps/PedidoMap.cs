@@ -27,6 +27,9 @@ namespace AgileFood.Models.Maps
             Property(x => x.FuncionarioId)
                 .IsRequired();
 
+            Property(x => x.ValorTotal)
+                .IsRequired();
+
             HasRequired(x => x.Funcionario)
                 .WithMany(x => x.Pedidos)
                 .HasForeignKey(c => c.FuncionarioId);
