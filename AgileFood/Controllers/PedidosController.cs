@@ -41,12 +41,13 @@ namespace AgileFood.Controllers
         public ActionResult Adicionar()
         {
             Fornecedor fornecedor = TempData["Fornecedor"] as Fornecedor;
+            if (fornecedor == null) return RedirectToAction("Index", "Pedidos");
+            AdicionandoInformacoesAoViewBag(fornecedor);
+            return View();
+        }
 
-            if (fornecedor == null)
-            {
-                return RedirectToAction("Index", "Pedidos");
-            }
-
+        private void AdicionandoInformacoesAoViewBag(Fornecedor fornecedor)
+        {
             ViewBag.Marmitex = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
             (g.Disponivel) && (g.Categoria == Categoria.Marmitex)).ToList();
             ViewBag.Bebidas = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
@@ -57,9 +58,6 @@ namespace AgileFood.Controllers
             (g.Disponivel) && (g.Categoria == Categoria.Outros)).ToList();
             ViewBag.Cardapio = GetCardapioDaSemana(fornecedor.Id);
             ViewBag.FornecedorNome = fornecedor.Nome;
-            ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome");
-
-            return View();
         }
 
         // POST: Pedidos/Adicionar
@@ -69,21 +67,30 @@ namespace AgileFood.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Adicionar([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
         {
-
             string observacoes = pedido.Observacoes;
             pedido = ((Pedido)Session["Pedido"]);
-            pedido.Observacoes = observacoes;
-
             if (ModelState.IsValid)
             {
+                pedido.Observacoes = observacoes;
+                pedido.Funcionario = RepositorioUsuarios.UsuarioLogado();
                 pedido.DataDeRegistro = DateTime.Now;
+                AnexandoDadosAoContexto(pedido);
                 db.Pedidos.Add(pedido);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome", pedido.FuncionarioId);
             return View(pedido);
+        }
+
+        // Método necessário para informar ao contexto db que esses dados já existem no banco de dados, 
+        // evitando serem duplicados
+        private void AnexandoDadosAoContexto(Pedido pedido)
+        {
+            db.Usuarios.Attach(pedido.Funcionario);
+            foreach (ItemPedido ip in pedido.Itens)
+            {
+                db.Produtos.Attach(ip.Produto);
+            }
         }
 
         // GET: Pedidos/Editar/5
@@ -147,18 +154,8 @@ namespace AgileFood.Controllers
 
         public PartialViewResult AdicionarProdutoAoPedido(int id)
         {
-
-            bool novoPedido = Session["Pedido"] == null ? true : false;
-
-            Pedido pedido = novoPedido ? new Pedido() : (Pedido)Session["Pedido"];
-            if (novoPedido)
-            {
-                Usuario usuarioLogado = RepositorioUsuarios.UsuarioLogado();
-                pedido.Funcionario = usuarioLogado;
-            }
-
+            Pedido pedido = (Session["Pedido"] == null) ? new Pedido() : (Pedido)Session["Pedido"];
             var produto = db.Produtos.Find(id);
-
             if (produto != null)
             {
                 var itemPedido = new ItemPedido
@@ -168,7 +165,6 @@ namespace AgileFood.Controllers
                     Quantidade = 1
 
                 };
-
                 if (pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)) != null)
                 {
                     pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)).Quantidade += 1;
@@ -177,10 +173,8 @@ namespace AgileFood.Controllers
                 {
                     pedido.Itens.Add(itemPedido);
                 }
-
                 Session["Pedido"] = pedido;
             }
-
             return PartialView("_ItensDoPedido", pedido);
         }
 
@@ -191,7 +185,6 @@ namespace AgileFood.Controllers
             {
                 Id = id
             };
-
             if (pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)).Quantidade > 1)
             {
                 pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)).Quantidade -= 1;
@@ -200,7 +193,6 @@ namespace AgileFood.Controllers
             {
                 pedido.Itens.Remove(pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)));
             }
-
             Session["Pedido"] = pedido;
             return PartialView("_ItensDoPedido", pedido);
         }
@@ -208,38 +200,14 @@ namespace AgileFood.Controllers
         private List<Tuple<string, string>> GetCardapioDaSemana(int id)
         {
             Cardapio cardapio = (Cardapio)db.Cardapios.Where(g => (g.Fornecedor.Id == id) && (g.Ativo)).First();
-
             List<Tuple<string, string>> lista = new List<Tuple<string, string>>();
-
-            if (cardapio.SegundaFeira != null)
-            {
-                lista.Add(new Tuple<string, string>("Segunda-Feira", cardapio.SegundaFeira));
-            }
-            if (cardapio.TercaFeira != null)
-            {
-                lista.Add(new Tuple<string, string>("Terça-Feira", cardapio.TercaFeira));
-            }
-            if (cardapio.QuartaFeira != null)
-            {
-                lista.Add(new Tuple<string, string>("Quarta-Feira", cardapio.QuartaFeira));
-            }
-            if (cardapio.QuintaFeira != null)
-            {
-                lista.Add(new Tuple<string, string>("Quinta-Feira", cardapio.QuintaFeira));
-            }
-            if (cardapio.SextaFeira != null)
-            {
-                lista.Add(new Tuple<string, string>("Sexta-Feira", cardapio.SextaFeira));
-            }
-            if (cardapio.Sabado != null)
-            {
-                lista.Add(new Tuple<string, string>("Sábado", cardapio.Sabado));
-            }
-            if (cardapio.Domingo != null)
-            {
-                lista.Add(new Tuple<string, string>("Domingo", cardapio.Domingo));
-            }
-
+            if (cardapio.SegundaFeira != null) lista.Add(new Tuple<string, string>("Segunda-Feira", cardapio.SegundaFeira));
+            if (cardapio.TercaFeira != null) lista.Add(new Tuple<string, string>("Terça-Feira", cardapio.TercaFeira));
+            if (cardapio.QuartaFeira != null) lista.Add(new Tuple<string, string>("Quarta-Feira", cardapio.QuartaFeira));
+            if (cardapio.QuintaFeira != null) lista.Add(new Tuple<string, string>("Quinta-Feira", cardapio.QuintaFeira));
+            if (cardapio.SextaFeira != null) lista.Add(new Tuple<string, string>("Sexta-Feira", cardapio.SextaFeira));
+            if (cardapio.Sabado != null) lista.Add(new Tuple<string, string>("Sábado", cardapio.Sabado));
+            if (cardapio.Domingo != null) lista.Add(new Tuple<string, string>("Domingo", cardapio.Domingo));
             return lista;
         }
 

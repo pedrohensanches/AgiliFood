@@ -21,11 +21,7 @@ namespace AgileFood.Controllers
 
         public ActionResult Escolher(Fornecedor fornecedor)
         {
-            if (fornecedor == null)
-            {
-                return HttpNotFound();
-            }
-
+            if (fornecedor == null) return HttpNotFound();
             TempData["Fornecedor"] = fornecedor;
             return RedirectToAction("Adicionar", "Pedidos");
         }
