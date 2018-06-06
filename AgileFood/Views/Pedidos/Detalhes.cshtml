@@ -4,50 +4,28 @@
     ViewBag.Title = "Detalhes";
 }
 
-<h2>Detalhes do Pedido  @Html.DisplayFor(model => model.Id) - @Html.DisplayFor(model => model.DataDeRegistro)</h2>
+<h2>Detalhes do Pedido @Html.DisplayFor(model => model.Id) de @Html.DisplayFor(model => model.Funcionario.Nome)</h2>
 
 <div>
     <hr />
     <dl class="dl-horizontal">
 
-        <dt>
-            Fornecedor
-        </dt>
-
-        <dd>
-            Restaurante
-        </dd>
-
-        <dt>
-            Itens
-        </dt>
-
-        <dd>
-            Item 1 - R$
-        </dd>
-        <dd>
-            Item 2 - R$
-        </dd>
-
-        <dt>
-            Valor total
-        </dt>
-
-        <dd>
-            R$
-        </dd>
-
-        <dt>
-            Observações
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Observacoes)
-        </dd>
+        @*<dt>Fornecedor</dt>
+            <dd>Restaurante</dd>*@
+        <dt>Pedido em</dt>
+        <dd>@Html.DisplayFor(model => model.DataDeRegistro)</dd>
+        <dt>Itens</dt>
+        @foreach (var item in Model.Itens)
+        {
+            <dd>@item.Quantidade @item.Produto.Nome - <strong>R$ @item.Produto.Valor</strong></dd>
+        }
+        <dt>Valor total</dt>
+        <dd><strong>R$ @Html.DisplayFor(model => model.ValorTotal)</strong></dd>
+        <dt>Observações</dt>
+        <dd>@Html.DisplayFor(model => model.Observacoes)</dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Editar", "Editar", new { id = Model.Id }) |
     @Html.ActionLink("Voltar", "Index")
 </p>
