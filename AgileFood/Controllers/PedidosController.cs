@@ -18,6 +18,7 @@ namespace AgileFood.Controllers
         // GET: Pedidos
         public ActionResult Index()
         {
+            Session["Pedido"] = null;
             var pedidos = db.Pedidos.Include(p => p.Funcionario);
             return View(pedidos.ToList());
         }
@@ -77,6 +78,7 @@ namespace AgileFood.Controllers
                 AnexandoDadosAoContexto(pedido);
                 db.Pedidos.Add(pedido);
                 db.SaveChanges();
+                Session["Pedido"] = null;
                 return RedirectToAction("Index");
             }
             return View(pedido);
