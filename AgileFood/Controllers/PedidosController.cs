@@ -49,15 +49,11 @@ namespace AgileFood.Controllers
 
         private void AdicionandoInformacoesAoViewBag(Fornecedor fornecedor)
         {
-            ViewBag.Marmitex = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
-            (g.Disponivel) && (g.Categoria == Categoria.Marmitex)).ToList();
-            ViewBag.Bebidas = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
-            (g.Disponivel) && (g.Categoria == Categoria.Bebidas)).ToList();
-            ViewBag.Sobremesas = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
-            (g.Disponivel) && (g.Categoria == Categoria.Sobremesas)).ToList();
-            ViewBag.Outros = db.Produtos.Where(g => (g.Fornecedor.Id == fornecedor.Id) &&
-            (g.Disponivel) && (g.Categoria == Categoria.Outros)).ToList();
-            ViewBag.Cardapio = GetCardapioDaSemana(fornecedor.Id);
+            ViewBag.Marmitex = RepositorioProdutos.RetornaMarmitex(fornecedor.Id);
+            ViewBag.Bebidas = RepositorioProdutos.RetornaBebidas(fornecedor.Id);
+            ViewBag.Sobremesas = RepositorioProdutos.RetornaSobremesas(fornecedor.Id);
+            ViewBag.Outros = RepositorioProdutos.RetornaOutrosProdutos(fornecedor.Id);
+            ViewBag.Cardapio = RepositorioCardapios.GetCardapioDaSemana(fornecedor.Id);
             ViewBag.FornecedorNome = fornecedor.Nome;
         }
 
@@ -93,39 +89,6 @@ namespace AgileFood.Controllers
             {
                 db.Produtos.Attach(ip.Produto);
             }
-        }
-
-        // GET: Pedidos/Editar/5
-        public ActionResult Editar(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Pedido pedido = db.Pedidos.Find(id);
-            if (pedido == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome", pedido.FuncionarioId);
-            return View(pedido);
-        }
-
-        // POST: Pedidos/Editar/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(pedido).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.FuncionarioId = new SelectList(db.Usuarios, "Id", "Nome", pedido.FuncionarioId);
-            return View(pedido);
         }
 
         // GET: Pedidos/Deletar/5
@@ -184,10 +147,7 @@ namespace AgileFood.Controllers
         public PartialViewResult RemoverProdutoDoPedido(int id)
         {
             Pedido pedido = ((Pedido)Session["Pedido"]);
-            Produto produto = new Produto
-            {
-                Id = id
-            };
+            Produto produto = new Produto { Id = id };
             ItemPedido item = pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto));
             if (item.Quantidade > 1)
             {
@@ -200,20 +160,6 @@ namespace AgileFood.Controllers
             pedido.ValorTotal -= item.Produto.Valor;
             Session["Pedido"] = pedido;
             return PartialView("_ItensDoPedido", pedido);
-        }
-
-        private List<Tuple<string, string>> GetCardapioDaSemana(int id)
-        {
-            Cardapio cardapio = (Cardapio)db.Cardapios.Where(g => (g.Fornecedor.Id == id) && (g.Ativo)).First();
-            List<Tuple<string, string>> lista = new List<Tuple<string, string>>();
-            if (cardapio.SegundaFeira != null) lista.Add(new Tuple<string, string>("Segunda-Feira", cardapio.SegundaFeira));
-            if (cardapio.TercaFeira != null) lista.Add(new Tuple<string, string>("Terça-Feira", cardapio.TercaFeira));
-            if (cardapio.QuartaFeira != null) lista.Add(new Tuple<string, string>("Quarta-Feira", cardapio.QuartaFeira));
-            if (cardapio.QuintaFeira != null) lista.Add(new Tuple<string, string>("Quinta-Feira", cardapio.QuintaFeira));
-            if (cardapio.SextaFeira != null) lista.Add(new Tuple<string, string>("Sexta-Feira", cardapio.SextaFeira));
-            if (cardapio.Sabado != null) lista.Add(new Tuple<string, string>("Sábado", cardapio.Sabado));
-            if (cardapio.Domingo != null) lista.Add(new Tuple<string, string>("Domingo", cardapio.Domingo));
-            return lista;
         }
 
         protected override void Dispose(bool disposing)

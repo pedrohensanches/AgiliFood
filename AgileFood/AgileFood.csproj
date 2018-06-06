@@ -180,8 +180,10 @@
     <Compile Include="Models\Produto.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorios\RepositorioCardapios.cs" />
     <Compile Include="Repositorios\RepositorioCookies.cs" />
     <Compile Include="Repositorios\RepositorioCriptografia.cs" />
+    <Compile Include="Repositorios\RepositorioProdutos.cs" />
     <Compile Include="Repositorios\RepositorioUsuarios..cs" />
   </ItemGroup>
   <ItemGroup>
@@ -281,7 +283,6 @@
     <Content Include="Views\Pedidos\Adicionar.cshtml" />
     <Content Include="Views\Pedidos\Deletar.cshtml" />
     <Content Include="Views\Pedidos\Detalhes.cshtml" />
-    <Content Include="Views\Pedidos\Editar.cshtml" />
     <Content Include="Views\Pedidos\Index.cshtml" />
     <Content Include="Views\Produtos\Adicionar.cshtml" />
     <Content Include="Views\Produtos\Deletar.cshtml" />
