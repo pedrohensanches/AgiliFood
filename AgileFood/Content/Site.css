@@ -59,9 +59,21 @@ textarea {
     border-radius: 5px;
 }
 
+.bt-adicionar-float {
+    float: right;
+}
+
 @media (max-width: 900px) {
     .dia-cardapio {
         min-height: 120px;
         min-width: 155px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .bt-adicionar-float {
+        float: left;
+        margin-left: 10px;
     }
 }

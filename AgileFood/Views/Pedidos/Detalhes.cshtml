@@ -13,7 +13,7 @@
         @*<dt>Fornecedor</dt>
             <dd>Restaurante</dd>*@
         <dt>Pedido em</dt>
-        <dd>@Html.DisplayFor(model => model.DataDeRegistro)</dd>
+        <dd>@Model.DataDeRegistro.ToString("dd/MM/yyyy 'às' HH:mm")</dd>
         <dt>Itens</dt>
         @foreach (var item in Model.Itens)
         {

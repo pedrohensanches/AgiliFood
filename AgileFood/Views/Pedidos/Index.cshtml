@@ -5,35 +5,45 @@
 }
 
 <h2>Pedidos</h2>
+<div>
+    <p style="float: left; margin: 0 5px 0 0">Referentes a</p>
+    @using (Html.BeginForm("Index", "Pedidos", FormMethod.Get, new { @Style = "float: left;" } ))
+    {
+        @Html.DropDownList("pesquisaMes", new List<SelectListItem>{
+        new SelectListItem{ Text="Mês", Value = null, Selected = true },
+        new SelectListItem{ Text="Janeiro", Value = "1" },
+        new SelectListItem{ Text="Fevereiro", Value = "2" },
+        new SelectListItem{ Text="Março", Value = "3" },
+        new SelectListItem{ Text="Abril", Value = "4" },
+        new SelectListItem{ Text="Maio", Value = "5" },
+        new SelectListItem{ Text="Junho", Value = "6" }},
+        new{onchange = @"form.submit();", @Style = "margin-right: 3px"})
 
-<p>
-    @Html.ActionLink("Adicionar", "Adicionar")
-</p>
+        int anoAtual = DateTime.Now.Year;
+        @Html.DropDownList("pesquisaAno", new List<SelectListItem>{
+        new SelectListItem{ Text="Ano", Value = null, Selected = true },
+        new SelectListItem{ Text=(anoAtual).ToString(), Value = (anoAtual).ToString() },
+        new SelectListItem{ Text=(anoAtual-1).ToString(), Value = (anoAtual-1).ToString() },
+        new SelectListItem{ Text=(anoAtual-2).ToString(), Value = (anoAtual-2).ToString() },
+        new SelectListItem{ Text=(anoAtual-3).ToString(), Value = (anoAtual-3).ToString() }},
+        new { onchange = @"form.submit();" })
+    }
+    <p class="bt-adicionar-float">@Html.ActionLink("Adicionar", "Adicionar")</p>
+</div>
+
 <table class="table">
     <tr>
-        <th>
-            Data
-        </th>
-        <th>
-            Valor Total
-        </th>
-        <th>
-            Fornecedor
-        </th>
-        <th>
-        </th>
+        <th>Data</th>
+        <th>Valor Total</th>
+        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
+            <td>@item.DataDeRegistro.ToString("dd/MM/yyyy")</td>
+            <td>R$ @item.ValorTotal</td>
             <td>
-                @Html.DisplayFor(modelItem => item.DataDeRegistro)
-            </td>
-            <td></td>
-            <td></td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
                 @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }) |
                 @Html.ActionLink("Deletar", "Deletar", new { id = item.Id })
             </td>

@@ -16,10 +16,21 @@ namespace AgileFood.Controllers
         private AgiliFoodContext db = new AgiliFoodContext();
 
         // GET: Pedidos
-        public ActionResult Index()
+        public ActionResult Index(int? pesquisaMes, int? pesquisaAno)
         {
+            var pedidos = db.Pedidos.Include(p => p.Funcionario).OrderBy(p => p.DataDeRegistro).AsQueryable();
+
+            if (pesquisaMes != null)
+            {
+                pedidos = pedidos.Where(c => c.DataDeRegistro.Month == pesquisaMes);
+            }
+
+            if (pesquisaAno != null)
+            {
+                pedidos = pedidos.Where(c => c.DataDeRegistro.Year == pesquisaAno);
+            }
+
             Session["Pedido"] = null;
-            var pedidos = db.Pedidos.Include(p => p.Funcionario);
             return View(pedidos.ToList());
         }
 
