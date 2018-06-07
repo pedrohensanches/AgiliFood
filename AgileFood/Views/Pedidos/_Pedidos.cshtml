@@ -4,12 +4,13 @@
     <table class="table">
         <tr>
             <th>Data</th>
-            <th>Valor Total</th>
+            <th>Valor</th>
             <th></th>
         </tr>
-
+        @{double valorTotal = 0;}
         @foreach (var item in Model)
         {
+            valorTotal += item.ValorTotal;
             String valor = string.Format("{0:N}", item.ValorTotal);
 
             <tr>
@@ -23,6 +24,11 @@
                 </td>
             </tr>
         }
-
+        <tr>
+            <td style="text-align: right;font-weight: bold;">Total:</td>
+            @{String valortotal = string.Format("{0:N}", valorTotal);}
+            <td style="font-weight: bold">R$ @valorTotal</td>
+            <th></th>
+        </tr>
     </table>
 </div>
