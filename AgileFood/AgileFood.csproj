@@ -273,7 +273,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Cardapios\Adicionar.cshtml" />
     <Content Include="Views\Cardapios\Deletar.cshtml" />
-    <Content Include="Views\Cardapios\Details.cshtml" />
     <Content Include="Views\Cardapios\Editar.cshtml" />
     <Content Include="Views\Cardapios\Index.cshtml" />
     <Content Include="Views\Pedidos\Adicionar.cshtml" />

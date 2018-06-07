@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AgileFood.Models;
+using AgileFood.Repositorios;
 
 namespace AgileFood.Controllers
 {
@@ -21,25 +22,9 @@ namespace AgileFood.Controllers
             return View(cardapios.ToList());
         }
 
-        // GET: Cardapios/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cardapio cardapio = db.Cardapios.Find(id);
-            if (cardapio == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cardapio);
-        }
-
         // GET: Cardapios/Adicionar
         public ActionResult Adicionar()
         {
-            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome");
             return View();
         }
 
@@ -48,16 +33,17 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adicionar([Bind(Include = "Id,Titulo,DataDeRegistro,Ativo,FornecedorId,SegundaFeira,TercaFeira,QuartaFeira,QuintaFeira,SextaFeira,Sabado,Domingo")] Cardapio cardapio)
+        public ActionResult Adicionar([Bind(Include = "Id,Titulo,Ativo,SegundaFeira,TercaFeira,QuartaFeira,QuintaFeira,SextaFeira,Sabado,Domingo")] Cardapio cardapio)
         {
             if (ModelState.IsValid)
             {
+                cardapio.DataDeRegistro = DateTime.Now;
+                cardapio.Fornecedor = RepositorioFornecedores.RecuperaFornecedorLogado(db.Usuarios.Include(p => p.Fornecedor));
                 db.Cardapios.Add(cardapio);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", cardapio.FornecedorId);
             return View(cardapio);
         }
 
@@ -73,7 +59,6 @@ namespace AgileFood.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", cardapio.FornecedorId);
             return View(cardapio);
         }
 
@@ -82,15 +67,17 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Id,Titulo,DataDeRegistro,Ativo,FornecedorId,SegundaFeira,TercaFeira,QuartaFeira,QuintaFeira,SextaFeira,Sabado,Domingo")] Cardapio cardapio)
+        public ActionResult Editar([Bind(Include = "Id,Titulo,Ativo,SegundaFeira,TercaFeira,QuartaFeira,QuintaFeira,SextaFeira,Sabado,Domingo")] Cardapio cardapio)
         {
             if (ModelState.IsValid)
             {
+                cardapio.DataDeRegistro = DateTime.Now;
                 db.Entry(cardapio).State = EntityState.Modified;
+                //db.Entry(cardapio).Property(p => p.DataDeRegistro).IsModified = false;
+                db.Entry(cardapio).Property(p => p.FornecedorId).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", cardapio.FornecedorId);
             return View(cardapio);
         }
 
