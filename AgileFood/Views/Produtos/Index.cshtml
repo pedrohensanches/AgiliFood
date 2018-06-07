@@ -28,6 +28,7 @@
 
     @foreach (var item in Model)
     {
+        String valor = string.Format("{0:N}", item.Valor);
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
@@ -36,7 +37,7 @@
                 @Html.DisplayFor(modelItem => item.Descricao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Valor)
+                R$ @valor
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Disponivel)

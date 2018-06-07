@@ -28,9 +28,10 @@
                 <table class="table">
                     @foreach (AgileFood.Models.Produto produto in ViewBag.Marmitex)
                     {
+                        String valor = string.Format("{0:N}", produto.Valor);
                         <tr>
                             <td style="width: 75%">@produto.Nome</td>
-                            <td style="text-align: right">R$ @produto.Valor</td>
+                            <td style="text-align: right">R$ @valor</td>
                             <td style="text-align: right">
                                 <input type="button" value="+" onclick="addProduto(@produto.Id);" />
                             </td>
@@ -47,9 +48,10 @@
                 <table class="table">
                     @foreach (AgileFood.Models.Produto produto in ViewBag.Bebidas)
                     {
+                        String valor = string.Format("{0:N}", produto.Valor);
                         <tr>
                             <td style="width: 75%">@produto.Nome</td>
-                            <td style="text-align: right">R$ @produto.Valor</td>
+                            <td style="text-align: right">R$ @valor</td>
                             <td style="text-align: right">
                                 <input type="button" value="+" onclick="addProduto(@produto.Id);" />
                             </td>
@@ -66,9 +68,10 @@
                 <table class="table">
                     @foreach (AgileFood.Models.Produto produto in ViewBag.Sobremesas)
                     {
+                        String valor = string.Format("{0:N}", produto.Valor);
                         <tr>
                             <td style="width: 75%">@produto.Nome</td>
-                            <td style="text-align: right">R$ @produto.Valor</td>
+                            <td style="text-align: right">R$ @valor</td>
                             <td style="text-align: right">
                                 <input type="button" value="+" onclick="addProduto(@produto.Id);" />
                             </td>
@@ -85,9 +88,10 @@
                 <table class="table">
                     @foreach (AgileFood.Models.Produto produto in ViewBag.Outros)
                     {
+                        String valor = string.Format("{0:N}", produto.Valor);
                         <tr>
                             <td style="width: 75%">@produto.Nome</td>
-                            <td style="text-align: right">R$ @produto.Valor</td>
+                            <td style="text-align: right">R$ @valor</td>
                             <td style="text-align: right">
                                 <input type="button" value="+" onclick="addProduto(@produto.Id);" />
                             </td>

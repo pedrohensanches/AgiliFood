@@ -9,18 +9,17 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
-
-        @*<dt>Fornecedor</dt>
-            <dd>Restaurante</dd>*@
         <dt>Pedido em</dt>
         <dd>@Model.DataDeRegistro.ToString("dd/MM/yyyy 'às' HH:mm")</dd>
         <dt>Itens</dt>
         @foreach (var item in Model.Itens)
         {
-            <dd>@item.Quantidade @item.Produto.Nome - <strong>R$ @item.Produto.Valor</strong></dd>
+            String valor = string.Format("{0:N}", item.Produto.Valor);
+            <dd>@item.Quantidade @item.Produto.Nome - <strong>R$ @valor</strong></dd>
         }
         <dt>Valor total</dt>
-        <dd><strong>R$ @Html.DisplayFor(model => model.ValorTotal)</strong></dd>
+        @{ String valorTotal = string.Format("{0:N}", Model.ValorTotal); }
+        <dd><strong>R$ @valorTotal</strong></dd>
         <dt>Observações</dt>
         <dd>@Html.DisplayFor(model => model.Observacoes)</dd>
 

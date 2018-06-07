@@ -7,7 +7,7 @@
 <h2>Pedidos</h2>
 <div>
     <p style="float: left; margin: 0 5px 0 0">Referentes a</p>
-    @using (Html.BeginForm("Index", "Pedidos", FormMethod.Get, new { @Style = "float: left;" } ))
+    @using (Html.BeginForm("Index", "Pedidos", FormMethod.Get, new { @Style = "float: left;" }))
     {
         @Html.DropDownList("pesquisaMes", new List<SelectListItem>{
         new SelectListItem{ Text="Mês", Value = null, Selected = true },
@@ -46,9 +46,13 @@
 
     @foreach (var item in Model)
     {
+        String valor = string.Format("{0:N}", item.ValorTotal);
+
         <tr>
             <td>@item.DataDeRegistro.ToString("dd/MM/yyyy")</td>
-            <td>R$ @item.ValorTotal</td>
+            <td>
+                R$ @valor
+            </td>
             <td>
                 @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }) |
                 @Html.ActionLink("Deletar", "Deletar", new { id = item.Id })
