@@ -18,19 +18,8 @@ namespace AgileFood.Controllers
         // GET: Pedidos
         public ActionResult Index(int? pesquisaMes, int? pesquisaAno)
         {
-            var pedidos = db.Pedidos.Include(p => p.Funcionario).OrderBy(p => p.DataDeRegistro).AsQueryable();
-
-            if (pesquisaMes != null)
-            {
-                pedidos = pedidos.Where(c => c.DataDeRegistro.Month == pesquisaMes);
-            }
-
-            if (pesquisaAno != null)
-            {
-                pedidos = pedidos.Where(c => c.DataDeRegistro.Year == pesquisaAno);
-            }
-
             Session["Pedido"] = null;
+            List<Pedido> pedidos = RepositorioPedidos.RetornaPedidos(db.Pedidos.Include(p => p.Funcionario), pesquisaMes, pesquisaAno);
             return View(pedidos.ToList());
         }
 
