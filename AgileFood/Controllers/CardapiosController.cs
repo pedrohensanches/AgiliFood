@@ -16,10 +16,12 @@ namespace AgileFood.Controllers
         private AgiliFoodContext db = new AgiliFoodContext();
 
         // GET: Cardapios
-        public ActionResult Index()
+        public ActionResult Index(int? pesquisaStatus)
         {
-            var cardapios = db.Cardapios.Include(c => c.Fornecedor);
-            return View(cardapios.ToList());
+            List<Cardapio> cardapios = RepositorioCardapios.RetornaCardapios(pesquisaStatus, db.Usuarios.Include(p => p.Fornecedor));
+            if (Request.IsAjaxRequest()) return PartialView("_Cardapios", cardapios);
+
+            return View(cardapios);
         }
 
         // GET: Cardapios/Adicionar

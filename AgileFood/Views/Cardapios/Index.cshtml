@@ -4,64 +4,24 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Cardápios</h2>
-
-<p>
-    @Html.ActionLink("Adicionar", "Adicionar")
-</p>
-<table class="table">
-    <tr>
-        <th>Título</th>
-        <th>Data</th>
-        <th>Ativo</th>
-        <th>Segunda-Feira</th>
-        <th>Terça-Feira</th>
-        <th>Quarta-Feira</th>
-        <th>Quinta-Feira</th>
-        <th>Sexta-Feira</th>
-        <th>Sábado</th>
-        <th>Domingo</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<h2>Meus cardápios</h2>
+<div style="margin-bottom: 50px;">
+    @using (Ajax.BeginForm("Index", "Usuarios", new AjaxOptions
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Titulo)
-            </td>
-            <td>
-                @item.DataDeRegistro.ToString("dd/MM/yy")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ativo)
-            </td>
-            <td style="font-size: 12px;">
-                @Html.DisplayFor(modelItem => item.SegundaFeira)
-            </td>
-            <td style="font-size: 12px;">
-                @Html.DisplayFor(modelItem => item.TercaFeira)
-            </td>
-            <td style="font-size: 12px;">
-                @Html.DisplayFor(modelItem => item.QuartaFeira)
-            </td>
-            <td style="font-size: 12px;">
-                @Html.DisplayFor(modelItem => item.QuintaFeira)
-            </td>
-            <td style="font-size: 12px;">
-                @Html.DisplayFor(modelItem => item.SextaFeira)
-            </td>
-            <td style="font-size: 12px;">
-                @Html.DisplayFor(modelItem => item.Sabado)
-            </td>
-            <td style="font-size: 12px;">
-                @Html.DisplayFor(modelItem => item.Domingo)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", new { id = item.Id })
-                @Html.ActionLink("Deletar", "Deletar", new { id = item.Id })
-            </td>
-        </tr>
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "listaCardapios"
+    },
+    new { @Style = "float: left;" }))
+    {
+        @Html.DropDownList("pesquisaStatus", new List<SelectListItem>{
+                new SelectListItem{ Text="Status", Value = null, Selected = true },
+                new SelectListItem{ Text="Ativado", Value = "1" },
+                new SelectListItem{ Text="Desativado", Value = "0" }},
+                new{onchange = "$(this.form).submit();", @class = "form-control input-pesquisa"})
     }
+    <p class="bt-adicionar-float">@Html.ActionLink("Adicionar", "Adicionar", null, new { @class = "btn btn-primary btn-large" })</p>
+</div>
 
-</table>
+@Html.Partial("_Cardapios", Model)
+

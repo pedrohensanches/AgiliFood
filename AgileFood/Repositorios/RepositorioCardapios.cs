@@ -31,5 +31,28 @@ namespace AgileFood.Repositorios
                 return null;
             }
         }
+
+        public static List<Cardapio> RetornaCardapios(int? pesquisaStatus, IQueryable<Usuario> usuarios)
+        {
+            try
+            {
+                using (AgiliFoodContext db = new AgiliFoodContext())
+                {
+                    var cardapios = db.Cardapios.AsQueryable();
+                    switch (pesquisaStatus)
+                    {
+                        case 0: cardapios = cardapios.Where(u => u.Ativo == false); break;
+                        case 1: cardapios = cardapios.Where(u => u.Ativo == true); break;
+                    }
+                    Fornecedor fornecedor = RepositorioFornecedores.RecuperaFornecedorLogado(usuarios);
+                    cardapios = cardapios.Where(u => u.FornecedorId == fornecedor.Id);
+                    return cardapios.OrderBy(u => u.DataDeRegistro).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

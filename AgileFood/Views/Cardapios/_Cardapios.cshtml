@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AgileFood.Models.Cardapio>
+
+<div id="listaCardapios">
+    <table class="table">
+        <tr>
+            <th>Título</th>
+            <th>Data</th>
+            <th>Segunda-Feira</th>
+            <th>Terça-Feira</th>
+            <th>Quarta-Feira</th>
+            <th>Quinta-Feira</th>
+            <th>Sexta-Feira</th>
+            <th>Sábado</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @item.DataDeRegistro.ToString("dd/MM/yy")
+                </td>
+                <td style="font-size: 12px;">
+                    @Html.DisplayFor(modelItem => item.SegundaFeira)
+                </td>
+                <td style="font-size: 12px;">
+                    @Html.DisplayFor(modelItem => item.TercaFeira)
+                </td>
+                <td style="font-size: 12px;">
+                    @Html.DisplayFor(modelItem => item.QuartaFeira)
+                </td>
+                <td style="font-size: 12px;">
+                    @Html.DisplayFor(modelItem => item.QuintaFeira)
+                </td>
+                <td style="font-size: 12px;">
+                    @Html.DisplayFor(modelItem => item.SextaFeira)
+                </td>
+                <td style="font-size: 12px;">
+                    @Html.DisplayFor(modelItem => item.Sabado)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Editar", new { id = item.Id }, new { @class = "btn btn-success btn-sm glyphicon glyphicon-pencil", @Style = "margin-bottom: 3px;" })
+                    @Html.ActionLink(" ", "Deletar", new { id = item.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
