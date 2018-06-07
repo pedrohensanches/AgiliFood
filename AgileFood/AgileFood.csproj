@@ -158,7 +158,6 @@
     <Compile Include="Controllers\CardapiosController.cs" />
     <Compile Include="Controllers\FornecedoresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ItensController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -277,11 +276,6 @@
     <Content Include="Views\Cardapios\Details.cshtml" />
     <Content Include="Views\Cardapios\Editar.cshtml" />
     <Content Include="Views\Cardapios\Index.cshtml" />
-    <Content Include="Views\Itens\Create.cshtml" />
-    <Content Include="Views\Itens\Delete.cshtml" />
-    <Content Include="Views\Itens\Details.cshtml" />
-    <Content Include="Views\Itens\Edit.cshtml" />
-    <Content Include="Views\Itens\Index.cshtml" />
     <Content Include="Views\Pedidos\Adicionar.cshtml" />
     <Content Include="Views\Pedidos\Deletar.cshtml" />
     <Content Include="Views\Pedidos\Detalhes.cshtml" />

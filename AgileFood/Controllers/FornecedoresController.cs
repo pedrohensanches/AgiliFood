@@ -33,7 +33,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo,ResponsavelId")] Fornecedor fornecedor)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +44,7 @@ namespace AgileFood.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ResponsavelId = new SelectList(db.Usuarios, "Id", "Nome", fornecedor.ResponsavelId);
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios.Where(x => x.Tipo == TipoDeUsuario.Fornecedor), "Id", "Nome");
             return View(fornecedor);
         }
 
@@ -69,7 +69,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Id,Nome,CNPJ,Ativo,ResponsavelId")] Fornecedor fornecedor)
+        public ActionResult Editar([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
@@ -77,7 +77,7 @@ namespace AgileFood.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ResponsavelId = new SelectList(db.Usuarios, "Id", "Nome", fornecedor.ResponsavelId);
+            ViewBag.ResponsavelId = new SelectList(db.Usuarios.Where(x => x.Tipo == TipoDeUsuario.Fornecedor), "Id", "Nome");
             return View(fornecedor);
         }
 
