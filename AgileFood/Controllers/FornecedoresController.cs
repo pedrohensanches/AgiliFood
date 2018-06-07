@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AgileFood.Models;
+using AgileFood.Repositorios;
 
 namespace AgileFood.Controllers
 {
@@ -15,10 +16,11 @@ namespace AgileFood.Controllers
         private AgiliFoodContext db = new AgiliFoodContext();
 
         // GET: Fornecedores
-        public ActionResult Index()
+        public ActionResult Index(string pesquisaNome, int? pesquisaStatus)
         {
-            var fornecedores = db.Fornecedores.Include(f => f.Responsavel);
-            return View(fornecedores.ToList());
+            List<Fornecedor> fornecedores = RepositorioFornecedores.RetornaFornecedores(pesquisaNome, pesquisaStatus, db.Fornecedores.Include(f => f.Responsavel));
+            if (Request.IsAjaxRequest()) return PartialView("_Fornecedores", fornecedores);
+            return View(fornecedores);
         }
 
         // GET: Fornecedores/Adicionar
@@ -69,11 +71,12 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
+        public ActionResult Editar([Bind(Include = "Id,Nome,CNPJ,Ativo,ResponsavelId")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(fornecedor).State = EntityState.Modified;
+                //db.Entry(fornecedor).Property(f => f.ResponsavelId).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

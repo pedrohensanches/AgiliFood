@@ -297,6 +297,7 @@
     <Content Include="Views\Pedidos\_Pedidos.cshtml" />
     <Content Include="Views\Usuarios\_Usuarios.cshtml" />
     <Content Include="Views\Produtos\_Produtos.cshtml" />
+    <Content Include="Views\Fornecedores\_Fornecedores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -73,7 +73,6 @@ namespace AgileFood.Controllers
             {
                 cardapio.DataDeRegistro = DateTime.Now;
                 db.Entry(cardapio).State = EntityState.Modified;
-                //db.Entry(cardapio).Property(p => p.DataDeRegistro).IsModified = false;
                 db.Entry(cardapio).Property(p => p.FornecedorId).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
