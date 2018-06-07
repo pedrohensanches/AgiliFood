@@ -5,48 +5,23 @@
 }
 
 <h2>Produtos</h2>
-
-<p>
-    @Html.ActionLink("Adicionar", "Adicionar")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Nome)
-        </th>
-        <th>
-            Descrição
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Valor)
-        </th>
-        <th>
-            Disponível
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
+<div style="margin-bottom: 50px;">
+    @using (Ajax.BeginForm("Index", "Usuarios", new AjaxOptions
     {
-        String valor = string.Format("{0:N}", item.Valor);
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                R$ @valor
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Disponivel)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Editar", new { id = item.Id }) |
-                @Html.ActionLink("Deletar", "Deletar", new { id = item.Id })
-            </td>
-        </tr>
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "listaProdutos"
+    },
+    new { @Style = "float: left;" }))
+    {
+        @Html.DropDownList("pesquisaCategoria", EnumHelper.GetSelectList(typeof(AgileFood.Models.Categoria)), "Categoria", new { onchange = "$(this.form).submit();", @class = "form-control input-pesquisa" })
+        @Html.DropDownList("pesquisaStatus", new List<SelectListItem>{
+                new SelectListItem{ Text="Status", Value = null, Selected = true },
+                new SelectListItem{ Text="Disponível", Value = "1" },
+                new SelectListItem{ Text="Indisponível", Value = "0" }},
+                new{onchange = "$(this.form).submit();", @class = "form-control input-pesquisa"})
     }
+    <p class="bt-adicionar-float">@Html.ActionLink("Adicionar", "Adicionar", null, new { @class = "btn btn-primary btn-large" })</p>
+</div>
 
-</table>
+@Html.Partial("_Produtos", Model)

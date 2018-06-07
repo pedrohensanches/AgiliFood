@@ -1,0 +1,44 @@
+﻿@model IEnumerable<AgileFood.Models.Produto>
+
+<div id="listaProdutos">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                Descrição
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Valor)
+            </th>
+            <th>
+                Disponível
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            String valor = string.Format("{0:N}", item.Valor);
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    R$ @valor
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Disponivel)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Editar", new { id = item.Id }, new { @class = "btn btn-success btn-sm glyphicon glyphicon-pencil" })
+                    @Html.ActionLink(" ", "Deletar", new { id = item.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

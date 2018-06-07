@@ -24,6 +24,30 @@ namespace AgileFood.Repositorios
             }
         }
 
+        public static List<Produto> RetornaProdutos(int? pesquisaStatus, int? pesquisaCategoria, IQueryable<Usuario> usuarios)
+        {
+            try
+            {
+                using (AgiliFoodContext db = new AgiliFoodContext())
+                {
+                    var produtos = db.Produtos.AsQueryable();
+                    switch (pesquisaStatus)
+                    {
+                        case 0: produtos = produtos.Where(u => u.Disponivel == false); break;
+                        case 1: produtos = produtos.Where(u => u.Disponivel == true); break;
+                    }
+                    if (pesquisaCategoria != null) produtos = produtos.Where(u => (int)u.Categoria == pesquisaCategoria);
+                    Fornecedor fornecedor = RepositorioFornecedores.RecuperaFornecedorLogado(usuarios);
+                    produtos = produtos.Where(u => u.FornecedorId == fornecedor.Id);
+                    return produtos.OrderBy(u => u.Nome).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public static List<Produto> RetornaBebidas(int id)
         {
             try

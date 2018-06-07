@@ -16,10 +16,11 @@ namespace AgileFood.Controllers
         private AgiliFoodContext db = new AgiliFoodContext();
 
         // GET: Produtos
-        public ActionResult Index()
+        public ActionResult Index(int? pesquisaStatus, int? pesquisaCategoria)
         {
-            var produtos = db.Produtos.Include(p => p.Fornecedor);
-            return View(produtos.ToList());
+            List<Produto> produtos = RepositorioProdutos.RetornaProdutos(pesquisaStatus, pesquisaCategoria, db.Usuarios.Include(p => p.Fornecedor));
+            if (Request.IsAjaxRequest()) return PartialView("_Produtos", produtos);
+            return View(produtos);
         }
 
         // GET: Produtos/Adicionar
