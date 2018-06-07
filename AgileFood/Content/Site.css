@@ -59,6 +59,12 @@ textarea {
     border-radius: 5px;
 }
 
+.input-pesquisa {
+    margin-right: 3px;
+    float: left;
+    width: auto;
+}
+
 .bt-adicionar-float {
     float: right;
 }

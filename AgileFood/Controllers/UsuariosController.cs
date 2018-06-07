@@ -16,9 +16,11 @@ namespace AgileFood.Controllers
         private AgiliFoodContext db = new AgiliFoodContext();
 
         // GET: Usuarios
-        public ActionResult Index()
+        public ActionResult Index(string pesquisaNome, int? pesquisaTipo)
         {
-            return View(db.Usuarios.ToList());
+            List<Usuario> usuarios = RepositorioUsuarios.RetornaUsuarios(pesquisaNome, pesquisaTipo);
+            if (Request.IsAjaxRequest()) return PartialView("_Usuarios", usuarios);
+            return View(usuarios);
         }
 
         // GET: Usuarios/Cadastrar

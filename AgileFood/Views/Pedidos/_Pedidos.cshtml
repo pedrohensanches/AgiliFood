@@ -18,8 +18,8 @@
                     R$ @valor
                 </td>
                 <td>
-                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }) |
-                    @Html.ActionLink("Deletar", "Deletar", new { id = item.Id })
+                    @Html.ActionLink(" ", "Detalhes", new { id = item.Id }, new { @class = "btn btn-info btn-sm glyphicon glyphicon-list" })
+                    @Html.ActionLink(" ", "Deletar", new { id = item.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
                 </td>
             </tr>
         }

@@ -36,6 +36,31 @@ namespace AgileFood.Repositorios
             }
         }
 
+        public static List<Usuario> RetornaUsuarios(string pesquisaNome, int? pesquisaTipo)
+        {
+            try
+            {
+                using (AgiliFoodContext db = new AgiliFoodContext())
+                {
+                    var usuario = db.Usuarios.AsQueryable();
+                    if (!String.IsNullOrEmpty(pesquisaNome))
+                    {
+                        usuario = usuario.Where(u => u.Nome.Contains(pesquisaNome));
+                    }
+
+                    if (pesquisaTipo != null)
+                    {
+                        usuario = usuario.Where(u => (int)u.Tipo == pesquisaTipo);
+                    }
+                    return usuario.OrderBy(u => u.Nome).ToList();
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public static Usuario RecuperaUsuarioPorID(int Id)
         {
             try
