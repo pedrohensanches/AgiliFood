@@ -4,10 +4,16 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Pedidos</h2>
+<h2>Pedidos @DateTime.Now</h2>
 <div>
     <p style="float: left; margin: 0 5px 0 0">Referentes a</p>
-    @using (Html.BeginForm("Index", "Pedidos", FormMethod.Get, new { @Style = "float: left;" }))
+    @using (Ajax.BeginForm("Index", "Pedidos", new AjaxOptions
+    {
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "listaPedidos"
+    },
+    new { @Style = "float: left;" }))
     {
         @Html.DropDownList("pesquisaMes", new List<SelectListItem>{
         new SelectListItem{ Text="Mês", Value = null, Selected = true },
@@ -23,7 +29,7 @@
         new SelectListItem{ Text="Outubro", Value = "10" },
         new SelectListItem{ Text="Novembro", Value = "11" },
         new SelectListItem{ Text="Dezembro", Value = "12" }},
-        new{onchange = @"form.submit();", @Style = "margin-right: 3px"})
+        new{onchange = "$(this.form).submit();", @Style = "margin-right: 3px"})
 
         int anoAtual = DateTime.Now.Year;
         @Html.DropDownList("pesquisaAno", new List<SelectListItem>{
@@ -32,32 +38,9 @@
         new SelectListItem{ Text=(anoAtual-1).ToString(), Value = (anoAtual-1).ToString() },
         new SelectListItem{ Text=(anoAtual-2).ToString(), Value = (anoAtual-2).ToString() },
         new SelectListItem{ Text=(anoAtual-3).ToString(), Value = (anoAtual-3).ToString() }},
-        new { onchange = @"form.submit();" })
+        new { onchange = "$(this.form).submit();" })
     }
     <p class="bt-adicionar-float">@Html.ActionLink("Adicionar", "Adicionar")</p>
 </div>
 
-<table class="table">
-    <tr>
-        <th>Data</th>
-        <th>Valor Total</th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        String valor = string.Format("{0:N}", item.ValorTotal);
-
-        <tr>
-            <td>@item.DataDeRegistro.ToString("dd/MM/yyyy")</td>
-            <td>
-                R$ @valor
-            </td>
-            <td>
-                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }) |
-                @Html.ActionLink("Deletar", "Deletar", new { id = item.Id })
-            </td>
-        </tr>
-    }
-
-</table>
+@Html.Partial("_Pedidos", Model)

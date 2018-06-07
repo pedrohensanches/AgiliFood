@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AgileFood.Models.Pedido>
+
+<div id="listaPedidos">
+    <table class="table">
+        <tr>
+            <th>Data</th>
+            <th>Valor Total</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            String valor = string.Format("{0:N}", item.ValorTotal);
+
+            <tr>
+                <td>@item.DataDeRegistro.ToString("dd/MM/yyyy")</td>
+                <td>
+                    R$ @valor
+                </td>
+                <td>
+                    @Html.ActionLink("Detalhes", "Detalhes", new { id = item.Id }) |
+                    @Html.ActionLink("Deletar", "Deletar", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

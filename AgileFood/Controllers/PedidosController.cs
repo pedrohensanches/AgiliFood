@@ -18,8 +18,9 @@ namespace AgileFood.Controllers
         // GET: Pedidos
         public ActionResult Index(int? pesquisaMes, int? pesquisaAno)
         {
-            Session["Pedido"] = null;
             List<Pedido> pedidos = RepositorioPedidos.RetornaPedidos(db.Pedidos.Include(p => p.Funcionario), pesquisaMes, pesquisaAno);
+            if (Request.IsAjaxRequest()) return PartialView("_Pedidos", pedidos.ToList());
+            Session["Pedido"] = null;
             return View(pedidos.ToList());
         }
 

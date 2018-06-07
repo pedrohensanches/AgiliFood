@@ -294,6 +294,7 @@
     <Content Include="Views\Pedidos\_ItensDoPedido.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Scripts\login.home.js" />
+    <Content Include="Views\Pedidos\_Pedidos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
