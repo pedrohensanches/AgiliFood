@@ -37,6 +37,8 @@ namespace AgileFood.Controllers
         {
             if (ModelState.IsValid)
             {
+                Usuario usuarioFornecedor = db.Usuarios.Find(fornecedor.ResponsavelId);
+                usuarioFornecedor.Fornecedor = fornecedor;
                 db.Fornecedores.Add(fornecedor);
                 db.SaveChanges();
                 return RedirectToAction("Index");

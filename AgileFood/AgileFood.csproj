@@ -183,6 +183,7 @@
     <Compile Include="Repositorios\RepositorioCardapios.cs" />
     <Compile Include="Repositorios\RepositorioCookies.cs" />
     <Compile Include="Repositorios\RepositorioCriptografia.cs" />
+    <Compile Include="Repositorios\RepositorioFornecedores.cs" />
     <Compile Include="Repositorios\RepositorioPedidos.cs" />
     <Compile Include="Repositorios\RepositorioProdutos.cs" />
     <Compile Include="Repositorios\RepositorioUsuarios..cs" />

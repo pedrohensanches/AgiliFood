@@ -62,7 +62,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adicionar([Bind(Include = "Id,DataDeRegistro,Observacoes,FuncionarioId")] Pedido pedido)
+        public ActionResult Adicionar([Bind(Include = "Id, Observacoes")] Pedido pedido)
         {
             string observacoes = pedido.Observacoes;
             pedido = ((Pedido)Session["Pedido"]);
@@ -128,7 +128,6 @@ namespace AgileFood.Controllers
                     Produto = produto,
                     Pedido = pedido,
                     Quantidade = 1
-
                 };
                 if (pedido.Itens.FirstOrDefault(x => x.Produto.Equals(produto)) != null)
                 {

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AgileFood.Models;
+using AgileFood.Repositorios;
 
 namespace AgileFood.Controllers
 {
@@ -24,7 +25,6 @@ namespace AgileFood.Controllers
         // GET: Produtos/Adicionar
         public ActionResult Adicionar()
         {
-            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome");
             return View();
         }
 
@@ -33,16 +33,16 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adicionar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,Categoria,FornecedorId")] Produto produto)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,Categoria")] Produto produto)
         {
             if (ModelState.IsValid)
             {
+                produto.Fornecedor = RepositorioFornecedores.RecuperaFornecedorLogado(db.Usuarios.Include(p => p.Fornecedor));
                 db.Produtos.Add(produto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
 
@@ -58,7 +58,6 @@ namespace AgileFood.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
 
@@ -67,15 +66,15 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,Categoria,FornecedorId")] Produto produto)
+        public ActionResult Editar([Bind(Include = "Id,Nome,Descricao,Valor,Disponivel,Categoria")] Produto produto)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(produto).State = EntityState.Modified;
+                db.Entry(produto).Property(p => p.FornecedorId).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.FornecedorId = new SelectList(db.Fornecedores, "Id", "Nome", produto.FornecedorId);
             return View(produto);
         }
 
