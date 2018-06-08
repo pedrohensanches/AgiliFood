@@ -17,37 +17,29 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">AgiliFood</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("AgiliFood", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color: white; font-size: 20px;" })
             </div>
         </div>
     </div>
-    <div class="container">
-        <h2 style="margin-bottom: 15px">Quem é você?</h2>
-        <div id="status" style="width: 280px;font-size: 15px;padding: 8px 15px;" class="alert alert-info"></div>
-        <form id="form-login" name="form-login" method="get" action="javascript:function()">
-            <div style="margin-bottom: 10px">
-                <div>
-                    <label for="txtLogin">Login</label>
-                </div>
-                <div>
-                    <input class="input-login" type="text" id="txtLogin" name="txtLogin" />
-                </div>
+    <div class="container body-content">
+        <form class="form-signin" id="form-login" name="form-login" method="get" action="javascript:function()">
+            <h2 class="form-signin-heading">Por favor, entre!</h2>
+            <div id="status" style="width: 250px;font-size: 15px;padding: 8px 15px;margin-bottom: 15px;" class="alert alert-info"></div>
+            <input id="txtLogin" class="form-control" style="width: 250px" placeholder="E-mail" required="" autofocus="" type="email" name="txtLogin">
+            <input id="txtSenha" class="form-control" style="width: 250px" placeholder="Senha" required="" type="password" name="txtSenha">
+            <div class="checkbox">
+                <label><input type="checkbox">Lembrar</label>
             </div>
-            <div style="margin-bottom: 10px">
-                <div>
-                    <label for="txtSenha">Senha</label>
-                </div>
-                <div>
-                    <input class="input-login" type="password" id="txtSenha" name="txtSenha" />
-                </div>
-            </div>
-            <div>
-                <a style="width: 280px" id="botao-entrar" class="btn btn-primary btn-lg">Entrar</a>
-            </div>
+            <a style="width: 250px" id="botao-entrar" class="btn btn-primary btn-lg">Entrar</a>
+            <p style="margin-top: 15px">
+                @Html.ActionLink("Esqueceu sua senha?", "EsqueceuSuaSenha", "Home", null, new { })
+            </p>
         </form>
-        <p style="margin-top: 15px">
-            @Html.ActionLink("Esqueceu sua senha?", "EsqueceuSuaSenha", "Home", null, new { })
-        </p>
     </div>
 </body>
 </html>

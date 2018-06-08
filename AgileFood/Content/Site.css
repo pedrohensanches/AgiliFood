@@ -23,6 +23,24 @@ textarea {
     max-width: 280px;
 }
 
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.form-signin {
+    max-width: 285px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
 .dia-cardapio {
     border-width: 2px;
     border-color: #333;
