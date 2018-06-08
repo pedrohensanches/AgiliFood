@@ -37,21 +37,21 @@ namespace AgileFood.Filtros
             {
                 case "Pedidos":
                     if (usuarioLogado.Tipo == TipoDeUsuario.Fornecedor)
-                        FiltroDeContexto.RequestContext.HttpContext.Response.Redirect("/acesso-negado");
+                        FiltroDeContexto.RequestContext.HttpContext.Response.Redirect("~/Erro/AcessoNegado");
                     break;
                 case "Produtos":
                 case "Cardapios":
                     if (usuarioLogado.Tipo != TipoDeUsuario.Fornecedor)
-                        FiltroDeContexto.RequestContext.HttpContext.Response.Redirect("/acesso-negado");
+                        FiltroDeContexto.RequestContext.HttpContext.Response.Redirect("~/Erro/AcessoNegado");
                     break;
                 case "Fornecedores":
                 case "Usuarios":
                     if (usuarioLogado.Tipo != TipoDeUsuario.Administrador)
-                        FiltroDeContexto.RequestContext.HttpContext.Response.Redirect("/acesso-negado");
+                        FiltroDeContexto.RequestContext.HttpContext.Response.Redirect("~/Erro/AcessoNegado");
                     break;
                 case "Financeiro":
-                    if (usuarioLogado.Tipo != TipoDeUsuario.Financeiro || usuarioLogado.Tipo != TipoDeUsuario.Administrador)
-                        FiltroDeContexto.RequestContext.HttpContext.Response.Redirect("/acesso-negado");
+                    if (usuarioLogado.Tipo != TipoDeUsuario.Financeiro && usuarioLogado.Tipo != TipoDeUsuario.Administrador)
+                        FiltroDeContexto.RequestContext.HttpContext.Response.Redirect("~/Erro/AcessoNegado");
                     break;
             }
         }

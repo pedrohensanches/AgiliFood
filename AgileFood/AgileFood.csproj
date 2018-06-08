@@ -156,6 +156,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CardapiosController.cs" />
+    <Compile Include="Controllers\ErroController.cs" />
     <Compile Include="Controllers\FinanceiroController.cs" />
     <Compile Include="Controllers\FornecedoresController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -305,6 +306,7 @@
     <Content Include="Views\Financeiro\Index.cshtml" />
     <Content Include="Views\Financeiro\_Pedidos.cshtml" />
     <Content Include="Views\Financeiro\Detalhes.cshtml" />
+    <Content Include="Views\Erro\AcessoNegado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
