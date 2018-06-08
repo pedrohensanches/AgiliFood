@@ -20,13 +20,53 @@
     ViewBag.Title = "Início";
 }
 
-<div>
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a onclick="OpenCreatePopup()" class="btn btn-primary btn-lg">Fazer Pedido</a></p>
+@*<p><a onclick="OpenCreatePopup()" class="btn btn-primary btn-lg">Fazer Pedido</a></p>*@
+
+<div class="row" style="margin: 25px 0px">
+    <div class="col-md-3 div-info-home">
+        <div class="div-info-home-header">
+            <p>Total de pedidos no mês</p>
+        </div>
+        <div class="div-info-home-area">
+            <p>@Html.Raw(ViewBag.TotalPedidosNoMes)</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 div-info-home">
+        <div class="div-info-home-header">
+            <p>Valor dos pedidos no mês</p>
+        </div>
+        <div class="div-info-home-area">
+            @{ String valor = string.Format("{0:N}", ViewBag.ValorTotalPedidosNoMes); }
+            <p>R$ @valor</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 div-info-home">
+        <div class="div-info-home-header">
+            <p>Total de pedidos de hoje</p>
+        </div>
+        <div class="div-info-home-area">
+            <p>@Html.Raw(ViewBag.TotalPedidosHoje)</p>
+        </div>
+    </div>
+
+    <div class="col-md-3 div-info-home" style="border-width: 1px">
+        <div class="div-info-home-header">
+            <p>Valor dos pedidos de hoje</p>
+        </div>
+        <div class="div-info-home-area">
+            <p>@Html.Raw(ViewBag.ValorTotalPedidosHoje)</p>
+        </div>
+    </div>
 </div>
 
-<div class="row">
+<div class="col-md-12">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+</div>
+
+<div>
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>

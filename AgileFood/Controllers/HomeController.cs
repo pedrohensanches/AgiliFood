@@ -1,4 +1,5 @@
 ﻿using AgileFood.Models;
+using AgileFood.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,10 @@ namespace AgileFood.Controllers
         public ActionResult Index()
         {
             var fornecedores = db.Fornecedores.Where(x => x.Ativo == true);
+            ViewBag.TotalPedidosNoMes = RepositorioPedidos.TotalPedidosNoMes();
+            ViewBag.ValorTotalPedidosNoMes = RepositorioPedidos.ValorTotalPedidosNoMes();
+            ViewBag.TotalPedidosHoje = RepositorioPedidos.TotalPedidosHoje();
+            ViewBag.ValorTotalPedidosHoje = RepositorioPedidos.ValorTotalPedidosHoje();
             return View(fornecedores.ToList());
         }
 
