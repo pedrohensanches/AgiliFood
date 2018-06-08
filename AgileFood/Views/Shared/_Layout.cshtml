@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using AgileFood.Models;
+@using AgileFood.Repositorios;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -26,17 +29,36 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Início", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Pessoas", "About", "Home")</li>
-                    <li>@Html.ActionLink("Fornecedores", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Pedidos", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Relatórios", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
+                    @{
+                        Usuario usuarioLogado = RepositorioUsuarios.UsuarioLogado();
+                        if (usuarioLogado != null)
+                        {
+                            switch (usuarioLogado.Tipo)
+                            {
+                                case TipoDeUsuario.Funcionario:
+                                    <li>@Html.ActionLink("Meus Pedidos", "Index", "Pedidos")</li>
+                                    break;
+                                case TipoDeUsuario.Fornecedor:
+                                    <li>@Html.ActionLink("Meus Cardápios", "Index", "Cardapios")</li>
+                                    <li>@Html.ActionLink("Meus Produtos", "Index", "Produtos")</li>
+                                    break;
+                                case TipoDeUsuario.Financeiro:
+                                    <li>@Html.ActionLink("Meus Pedidos", "Index", "Pedidos")</li>
+                                    <li>@Html.ActionLink("Financeiro", "Index", "Financeiro")</li>
+                                    break;
+                                case TipoDeUsuario.Administrador:
+                                    <li>@Html.ActionLink("Meus Pedidos", "Index", "Pedidos")</li>
+                                    <li>@Html.ActionLink("Usuários", "Index", "Usuarios")</li>
+                                    <li>@Html.ActionLink("Fornecedores", "Index", "Fornecedores")</li>
+                                    <li>@Html.ActionLink("Financeiro", "Index", "Financeiro")</li>
+                                    break;
+                            }
+                        }
+                    }
                 </ul>
-
             </div>
         </div>
     </div>
-
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -45,7 +67,6 @@
             <p style="float: right">By Pedro Henrique Sanches da Silva</p>
         </footer>
     </div>
-
     @RenderSection("scripts", required: false)
 </body>
 </html>

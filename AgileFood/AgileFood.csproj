@@ -160,6 +160,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PedidosController.cs" />
     <Compile Include="Controllers\ProdutosController.cs" />
+    <Compile Include="Controllers\SegurancaController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Filtros\AutorizacaoDeAcesso.cs" />
     <Compile Include="Global.asax.cs">
@@ -303,6 +304,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\Seguranca\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

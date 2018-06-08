@@ -2,7 +2,7 @@
 	$("#status").hide();
 	$("#botao-entrar").click(function () {
 		$.ajax({
-			url: "/Usuarios/AutenticacaoDeUsuario",
+			url: "/Seguranca/AutenticacaoDeUsuario",
 			data: { Email: $("#txtLogin").val(), Senha: $("#txtSenha").val() },
 			dataType: "json",
 			type: "GET",
@@ -14,7 +14,7 @@
 			success: function (dados) {
 				if (dados.OK) {
 					$("#status").html(dados.Mensagem)
-					setTimeout(function () { window.location.href = "/Home/Index" }, 5000);
+					setTimeout(function () { window.location.href = "/Home/Index" }, 1000);
 					$("#status").show();
 				}
 				else {
