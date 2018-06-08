@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using AgileFood.Models;
 using AgileFood.Repositorios;
 
@@ -38,6 +39,8 @@ namespace AgileFood.Controllers
         {
             if (ModelState.IsValid)
             {
+                //usuario.Senha = RepositorioCriptografia.Criptografar(usuario.Senha);
+                usuario.Senha = FormsAuthentication.HashPasswordForStoringInConfigFile(usuario.Senha, "sha1");
                 db.Usuarios.Add(usuario);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -66,11 +69,12 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editar([Bind(Include = "Id,Nome,CPF,Email,Senha,Telefone,Tipo")] Usuario usuario)
+        public ActionResult Editar([Bind(Include = "Id,Nome,CPF,Email,Telefone,Tipo")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(usuario).State = EntityState.Modified;
+                db.Entry(usuario).Property(u => u.Senha).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -76,7 +76,6 @@ namespace AgileFood.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(fornecedor).State = EntityState.Modified;
-                //db.Entry(fornecedor).Property(f => f.ResponsavelId).IsModified = false;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
