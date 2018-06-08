@@ -10,15 +10,10 @@ namespace AgileFood.Repositorios
     {
         public static List<Pedido> RetornaPedidos(IQueryable<Pedido> pedidos, int? pesquisaMes, int? pesquisaAno)
         {
-            if (pesquisaMes != null)
-            {
-                pedidos = pedidos.Where(c => c.DataDeRegistro.Month == pesquisaMes);
-            }
-
-            if (pesquisaAno != null)
-            {
-                pedidos = pedidos.Where(c => c.DataDeRegistro.Year == pesquisaAno);
-            }
+            if (pesquisaMes != null) pedidos = pedidos.Where(c => c.DataDeRegistro.Month == pesquisaMes);
+            if (pesquisaAno != null) pedidos = pedidos.Where(c => c.DataDeRegistro.Year == pesquisaAno);
+            int idUsuarioLogado = RepositorioUsuarios.UsuarioLogado().Id;
+            pedidos = pedidos.Where(c => c.FuncionarioId == idUsuarioLogado);
             return pedidos.OrderBy(p => p.DataDeRegistro).ToList();
         }
     }
