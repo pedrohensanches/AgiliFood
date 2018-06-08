@@ -5,6 +5,8 @@
         <tr>
             <th>Data</th>
             <th>Valor</th>
+            <th>Itens</th>
+            <th>Fornecedor</th>
             <th></th>
         </tr>
         @{double valorTotal = 0;}
@@ -19,8 +21,19 @@
                     R$ @valor
                 </td>
                 <td>
+                    @{string it = ""; string fornecedor = ""; }
+                    @foreach (var ip in item.Itens)
+                    {
+                        it = String.Concat(it,ip.Quantidade + " " + ip.Produto.Nome+", ");
+                        fornecedor = ip.Produto.Fornecedor.Nome;
+                    }
+                    @it
+                </td>
+                <td>
+                    @fornecedor
+                </td>
+                <td>
                     @Html.ActionLink(" ", "Detalhes", new { id = item.Id }, new { @class = "btn btn-info btn-sm glyphicon glyphicon-list" })
-                    @Html.ActionLink(" ", "Deletar", new { id = item.Id }, new { @class = "btn btn-danger btn-sm glyphicon glyphicon-trash" })
                 </td>
             </tr>
         }
@@ -28,6 +41,7 @@
             <td style="text-align: right;font-weight: bold;">Total:</td>
             @{String valortotal = string.Format("{0:N}", valorTotal);}
             <td style="font-weight: bold">R$ @valorTotal</td>
+            <th></th>
             <th></th>
         </tr>
     </table>

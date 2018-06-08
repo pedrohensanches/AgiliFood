@@ -14,6 +14,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryuno")
+    @Scripts.Render("~/bundles/logouthome")
 </head>
 <body style="margin-bottom: 60px;">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -56,6 +57,18 @@
                         }
                     }
                 </ul>
+                <div class="dropdown" style="float: right; padding: 15px 0px;">
+                    @{ if (@usuarioLogado != null)
+                        {
+                            <span style="color: #9d9d9d">Olá @usuarioLogado.Nome!</span>
+                        };}
+                    <button id="dropdown-bt" class="dropdown-header-bt dropdown-toggle glyphicon glyphicon-chevron-down" type="button" data-toggle="dropdown"></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Meus dados</a></li>
+                        <li role="presentation" class="divider"></li>
+                        <li><a id="botao-sair" href="#">Sair</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -69,5 +82,10 @@
         </div>
     </footer>
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $('#dropdown-bt').on('mouseover', function () {
+            $(this).trigger('click');
+        })
+    </script>
 </body>
 </html>

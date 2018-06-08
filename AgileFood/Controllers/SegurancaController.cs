@@ -21,5 +21,11 @@ namespace AgileFood.Controllers
                 return Json(new { OK = false, Mensagem = "E-mail ou senha inválida, tente novamente!" }, JsonRequestBehavior.AllowGet);
             }
         }
+
+        [HttpGet]
+        public void Logout()
+        {
+            RepositorioCookies.RemoveCookieAuthentication();
+        }
     }
 }

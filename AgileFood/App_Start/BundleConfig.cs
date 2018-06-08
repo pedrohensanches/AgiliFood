@@ -23,6 +23,9 @@ namespace AgileFood
             bundles.Add(new ScriptBundle("~/bundles/loginhome").Include(
                 "~/Scripts/login.home.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/logouthome").Include(
+                "~/Scripts/logout.home.js"));
+
             // Use a versão em desenvolvimento do Modernizr para desenvolver e aprender. Em seguida, quando estiver
             // pronto para a produção, utilize a ferramenta de build em https://modernizr.com para escolher somente os testes que precisa.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(

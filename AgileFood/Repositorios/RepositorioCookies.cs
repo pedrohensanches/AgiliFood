@@ -23,5 +23,10 @@ namespace AgileFood.Repositorios
             HttpContext.Current.Response.Cookies.Add(UserCookie);
         }
 
+        public static void RemoveCookieAuthentication()
+        {
+            HttpContext.Current.Response.Cookies["UserCookieAuthentication"].Expires = DateTime.Now.AddDays(-1);
+        }
+
     }
 }

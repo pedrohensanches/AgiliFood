@@ -80,6 +80,12 @@ textarea {
     border-top: 1px #ddd solid;
 }
 
+.dropdown-header-bt {
+    background-color: #222;
+    border: none;
+    color: #9d9d9d;
+}
+
 @media (max-width: 900px) {
     .dia-cardapio {
         min-height: 120px;
