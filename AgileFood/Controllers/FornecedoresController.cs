@@ -35,7 +35,7 @@ namespace AgileFood.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo")] Fornecedor fornecedor)
+        public ActionResult Adicionar([Bind(Include = "Id,Nome,CNPJ,Ativo,ResponsavelId")] Fornecedor fornecedor)
         {
             if (ModelState.IsValid)
             {
