@@ -13,6 +13,16 @@ namespace AgileFood.Controllers
     {
         public ActionResult Index()
         {
+            TipoDeUsuario TipoUsuarioLogado = RepositorioUsuarios.UsuarioLogado().Tipo;
+
+            switch (TipoUsuarioLogado)
+            {
+                case TipoDeUsuario.Funcionario:
+                    return RedirectToAction("Index", "Pedidos");                    
+                case TipoDeUsuario.Fornecedor:
+                    return RedirectToAction("Index", "Cardapios");
+            }
+
             ViewBag.TotalPedidosNoMes = RepositorioPedidos.TotalPedidosNoMes();
             ViewBag.ValorTotalPedidosNoMes = RepositorioPedidos.ValorTotalPedidosNoMes();
             ViewBag.TotalPedidosHoje = RepositorioPedidos.TotalPedidosHoje();
