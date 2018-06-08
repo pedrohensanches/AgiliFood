@@ -1,0 +1,47 @@
+﻿@model IEnumerable<AgileFood.Models.Pedido>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Pedidos</h2>
+<div style="margin-bottom: 50px;">
+    @using (Ajax.BeginForm("Index", "Pedidos", new AjaxOptions
+    {
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "listaPedidos"
+    },
+    new { @Style = "float: left;" }))
+    {
+        @Html.TextBox("pesquisaNome", null, new { onkeyup = "$(this.form).submit();", @class = "form-control input-pesquisa", placeholder = "Nome" })
+
+        @Html.DropDownList("pesquisaMes", new List<SelectListItem>{
+        new SelectListItem{ Text="Mês", Value = null, Selected = true },
+        new SelectListItem{ Text="Janeiro", Value = "1" },
+        new SelectListItem{ Text="Fevereiro", Value = "2" },
+        new SelectListItem{ Text="Março", Value = "3" },
+        new SelectListItem{ Text="Abril", Value = "4" },
+        new SelectListItem{ Text="Maio", Value = "5" },
+        new SelectListItem{ Text="Junho", Value = "6" },
+        new SelectListItem{ Text="Julho", Value = "7" },
+        new SelectListItem{ Text="Agosto", Value = "8" },
+        new SelectListItem{ Text="Setembro", Value = "9" },
+        new SelectListItem{ Text="Outubro", Value = "10" },
+        new SelectListItem{ Text="Novembro", Value = "11" },
+        new SelectListItem{ Text="Dezembro", Value = "12" }},
+        new{onchange = "$(this.form).submit();", @class = "form-control input-pesquisa"})
+
+        int anoAtual = DateTime.Now.Year;
+        @Html.DropDownList("pesquisaAno", new List<SelectListItem>{
+        new SelectListItem{ Text="Ano", Value = null, Selected = true },
+        new SelectListItem{ Text=(anoAtual).ToString(), Value = (anoAtual).ToString() },
+        new SelectListItem{ Text=(anoAtual-1).ToString(), Value = (anoAtual-1).ToString() },
+        new SelectListItem{ Text=(anoAtual-2).ToString(), Value = (anoAtual-2).ToString() },
+        new SelectListItem{ Text=(anoAtual-3).ToString(), Value = (anoAtual-3).ToString() }},
+        new { onchange = "$(this.form).submit();", @class = "form-control input-pesquisa" })
+    }
+    <p class="bt-adicionar-float">@Html.ActionLink("Adicionar", "Adicionar", null, new { @class = "btn btn-primary btn-large" })</p>
+</div>
+
+@Html.Partial("_Pedidos", Model)

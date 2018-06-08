@@ -43,15 +43,8 @@ namespace AgileFood.Repositorios
                 using (AgiliFoodContext db = new AgiliFoodContext())
                 {
                     var usuario = db.Usuarios.AsQueryable();
-                    if (!String.IsNullOrEmpty(pesquisaNome))
-                    {
-                        usuario = usuario.Where(u => u.Nome.Contains(pesquisaNome));
-                    }
-
-                    if (pesquisaTipo != null)
-                    {
-                        usuario = usuario.Where(u => (int)u.Tipo == pesquisaTipo);
-                    }
+                    if (!String.IsNullOrEmpty(pesquisaNome)) usuario = usuario.Where(u => u.Nome.Contains(pesquisaNome));
+                    if (pesquisaTipo != null) usuario = usuario.Where(u => (int)u.Tipo == pesquisaTipo);
                     return usuario.OrderBy(u => u.Nome).ToList();
                 }
             }

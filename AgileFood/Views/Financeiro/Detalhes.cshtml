@@ -4,7 +4,7 @@
     ViewBag.Title = "Detalhes";
 }
 
-<h2>Detalhes do Pedido @Html.DisplayFor(model => model.Id)</h2>
+<h2>Detalhes do Pedido @Html.DisplayFor(model => model.Id) de @Html.DisplayFor(model => model.Funcionario.Nome)</h2>
 
 <div>
     <hr />
@@ -27,4 +27,5 @@
 </div>
 <p>
     @Html.ActionLink("Voltar", "Index")
+</p>
 </p>

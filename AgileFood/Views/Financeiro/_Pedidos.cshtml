@@ -3,9 +3,9 @@
 <div id="listaPedidos">
     <table class="table">
         <tr>
+            <th>Funcionário</th>
             <th>Data</th>
             <th>Valor</th>
-            <th>Itens</th>
             <th>Fornecedor</th>
             <th></th>
         </tr>
@@ -14,18 +14,10 @@
         {
             valorTotal += item.ValorTotal;
             String valor = string.Format("{0:N}", item.ValorTotal);
-
             <tr>
+                <td>@item.Funcionario.Nome</td>
                 <td>@item.DataDeRegistro.ToString("dd/MM/yyyy")</td>
                 <td>R$ @valor</td>
-                <td>
-                    @{string itensString = "";}
-                    @foreach (var itemPedido in item.Itens)
-                    {
-                        itensString = String.Concat(itensString, itemPedido.Quantidade + " " + itemPedido.Produto.Nome + ", ");
-                    }
-                    @itensString
-                </td>
                 <td>@item.Itens.First().Produto.Fornecedor.Nome</td>
                 <td>
                     @Html.ActionLink(" ", "Detalhes", new { id = item.Id }, new { @class = "btn btn-info btn-sm glyphicon glyphicon-list" })
