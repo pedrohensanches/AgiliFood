@@ -1,6 +1,4 @@
-﻿@model IEnumerable<AgileFood.Models.Fornecedor>
-
-@section Scripts {
+﻿@section Scripts {
     <script type="text/javascript">
         function OpenCreatePopup() {
             var div = $("#popup-escolher-fornecedor");
@@ -13,14 +11,11 @@
             });
         }
     </script>
-
 }
 
 @{
     ViewBag.Title = "Início";
 }
-
-@*<p><a onclick="OpenCreatePopup()" class="btn btn-primary btn-lg">Fazer Pedido</a></p>*@
 
 <div class="row" style="margin: 25px 0px">
     <div class="col-md-3 div-info-home">
@@ -86,28 +81,4 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
-</div>
-
-<div id="popup-escolher-fornecedor" style="display: none">
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.ActionLink("Escolher", "Escolher", new AgileFood.Models.Fornecedor() { Id = item.Id, Nome = item.Nome })
-                </td>
-            </tr>
-        }
-
-    </table>
 </div>

@@ -11,24 +11,13 @@ namespace AgileFood.Controllers
 {
     public class HomeController : BaseController
     {
-
-        private AgiliFoodContext db = new AgiliFoodContext();
-
         public ActionResult Index()
         {
-            var fornecedores = db.Fornecedores.Where(x => x.Ativo == true);
             ViewBag.TotalPedidosNoMes = RepositorioPedidos.TotalPedidosNoMes();
             ViewBag.ValorTotalPedidosNoMes = RepositorioPedidos.ValorTotalPedidosNoMes();
             ViewBag.TotalPedidosHoje = RepositorioPedidos.TotalPedidosHoje();
             ViewBag.ValorTotalPedidosHoje = RepositorioPedidos.ValorTotalPedidosHoje();
-            return View(fornecedores.ToList());
-        }
-
-        public ActionResult Escolher(Fornecedor fornecedor)
-        {
-            if (fornecedor == null) return HttpNotFound();
-            TempData["Fornecedor"] = fornecedor;
-            return RedirectToAction("Adicionar", "Pedidos");
+            return View();
         }
 
         public ActionResult Login()

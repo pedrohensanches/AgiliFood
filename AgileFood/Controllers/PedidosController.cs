@@ -21,6 +21,7 @@ namespace AgileFood.Controllers
             List<Pedido> pedidos = RepositorioPedidos.RetornaPedidosDoFuncionarioLogado(db.Pedidos.Include(p => p.Funcionario).Include(p => p.Itens), pesquisaMes, pesquisaAno);
             if (Request.IsAjaxRequest()) return PartialView("_Pedidos", pedidos);
             Session["Pedido"] = null;
+            ViewBag.fornecedores = db.Fornecedores.Where(x => x.Ativo == true).ToList();
             return View(pedidos);
         }
 
@@ -160,6 +161,13 @@ namespace AgileFood.Controllers
             pedido.ValorTotal -= item.Produto.Valor;
             Session["Pedido"] = pedido;
             return PartialView("_ItensDoPedido", pedido);
+        }
+
+        public ActionResult Escolher(Fornecedor fornecedor)
+        {
+            if (fornecedor == null) return HttpNotFound();
+            TempData["Fornecedor"] = fornecedor;
+            return RedirectToAction("Adicionar", "Pedidos");
         }
 
         protected override void Dispose(bool disposing)

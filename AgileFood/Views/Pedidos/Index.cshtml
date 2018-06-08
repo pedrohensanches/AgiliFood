@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<AgileFood.Models.Pedido>
+@using AgileFood.Models
 
 @{
     ViewBag.Title = "Index";
@@ -40,7 +41,46 @@
         new SelectListItem{ Text=(anoAtual-3).ToString(), Value = (anoAtual-3).ToString() }},
         new { onchange = "$(this.form).submit();", @class = "form-control input-pesquisa" })
     }
-    <p class="bt-adicionar-float">@Html.ActionLink("Adicionar", "Adicionar", null, new { @class = "btn btn-primary btn-large" })</p>
+    <p class="bt-adicionar-float"><a onclick="OpenCreatePopup()" class="btn btn-primary btn-large">Fazer Pedido</a></p>
 </div>
 
 @Html.Partial("_Pedidos", Model)
+
+<div id="popup-escolher-fornecedor" style="display: none">
+    <table class="table">
+        <tr>
+            <th>
+                Fornecedor
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (Fornecedor item in ViewBag.fornecedores)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.ActionLink("Escolher", "Escolher", new AgileFood.Models.Fornecedor() { Id = item.Id, Nome = item.Nome })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function OpenCreatePopup() {
+            var div = $("#popup-escolher-fornecedor");
+            div.dialog({
+                modal: true,
+                width: 320,
+                height: 400,
+                title: "Escolha o Restaurante",
+                resizable: false
+            });
+        }
+    </script>
+}
